@@ -2,6 +2,7 @@ class Cloud extends MovableObject {
     y = 20;
     height = 250;
     width = 500;
+    
 
 
 
@@ -9,10 +10,18 @@ class Cloud extends MovableObject {
         super().loadImage('img/5_background/layers/4_clouds/1.png');
 
         this.x = Math.random() * 500;
+        this.animate();
 
+    }
+
+    animate() {        /// l#sst die wolken bewegen 
+        this.moveLeft();
     }
 
 
 }
+
+
+
 
 
