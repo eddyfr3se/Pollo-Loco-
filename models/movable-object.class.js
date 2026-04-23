@@ -53,14 +53,26 @@ class MovableObject {
 
 
     moveRight() {
-        console.log('Moving right');
+        this.x += this.speed;
+
     }
 
     moveLeft() {
-        setInterval(() => {
-            this.x -= this.speed;
-        }, 1000 / 60);    ///kann einstellen wie oft /// 60 ma pro sekunde wird 0,15 an der x achse gespielt
+
+        this.x -= this.speed;
+       
+
 
     }
 
+    jump() {
+        this.speedY = 30;
+    }
+
+
+
 }
+
+
+
+
