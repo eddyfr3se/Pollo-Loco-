@@ -47,6 +47,13 @@ class Character extends MovableObject {
     world;
     coins = 0;
     bottles = 0;
+    offset = {
+        top: 120,
+        bottom: 30,
+        left: 40,
+        right: 40
+    };
+
 
 
 
