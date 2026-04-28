@@ -5,6 +5,7 @@ class Endboss extends MovableObject {
     y = -35;
     speed = 5;
     hadFirstContact = false;
+    firstContactTime = 0;
     attackTimer = 0;
 
     IMAGES_ALERT = [
