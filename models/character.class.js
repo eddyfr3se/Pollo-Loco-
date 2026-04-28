@@ -45,11 +45,15 @@ class Character extends MovableObject {
 
 
     world;
+    coins = 0;
+    bottles = 0;
+
 
 
 
     constructor() {
-        super().loadImage('img/2_character_pepe/2_walk/W-21.png');
+        super();
+        this.loadImage('img/2_character_pepe/2_walk/W-21.png');
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.IMAGES_DEAD);
@@ -58,6 +62,18 @@ class Character extends MovableObject {
 
         this.animate();
     }
+
+
+    collectCoin() {
+        this.coins += 20;
+        if (this.coins > 100) this.coins = 100;
+    }
+
+    collectBottle() {
+        this.bottles += 20;
+        if (this.bottles > 100) this.bottles = 100;
+    }
+
 
     animate() {
 
@@ -95,13 +111,14 @@ class Character extends MovableObject {
             } else if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
             } else {
-                if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+                if (this.world && this.world.keyboard && (this.world.keyboard.RIGHT || this.world.keyboard.LEFT)) {
                     //walk animation
                     this.playAnimation(this.IMAGES_WALKING);
                 }
             }
         }, 100);
     }
+
 
 
     jump() {
