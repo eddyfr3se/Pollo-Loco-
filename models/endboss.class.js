@@ -74,8 +74,13 @@ class Endboss extends MovableObject {
         if (this.isDead()) this.playAnimation(this.IMAGES_DEAD);
         else if (this.isHurt()) this.playAnimation(this.IMAGES_HURT);
         else if (this.hadFirstContact) {
-            this.playAttackOrWalk();
-            this.moveLeft();
+            let timepassed = new Date().getTime() - this.firstContactTime;
+            if (timepassed < 3000) {
+                this.playAnimation(this.IMAGES_ALERT);
+            } else {
+                this.playAttackOrWalk();
+                this.moveLeft();
+            }
         } else this.checkFirstContact();
     }
 
@@ -90,6 +95,7 @@ class Endboss extends MovableObject {
         this.playAnimation(this.IMAGES_ALERT);
         if (world && world.character.x > 2500) {
             this.hadFirstContact = true;
+            this.firstContactTime = new Date().getTime();
         }
     }
 }
