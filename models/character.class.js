@@ -65,12 +65,12 @@ class Character extends MovableObject {
 
 
     collectCoin() {
-        this.coins += 20;
+        this.coins += 10;
         if (this.coins > 100) this.coins = 100;
     }
 
     collectBottle() {
-        this.bottles += 20;
+        this.bottles += 10;
         if (this.bottles > 100) this.bottles = 100;
     }
 
