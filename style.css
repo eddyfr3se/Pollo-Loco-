@@ -3,7 +3,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-image: url('img/9_intro_outro_screens/start/startscreen_2.png');
+    background-image: url('img/9_intro_outro_screens/start/background.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -48,7 +48,7 @@ canvas {
     font-size: 18px;
     font-weight: bold;
     color: white;
-    background: linear-gradient(135deg, #FF9800, #F44336);
+    background: linear-gradient(#F44336);
     border: none;
     border-radius: 30px;
     cursor: pointer;
@@ -62,7 +62,7 @@ canvas {
 }
 
 .btn-secondary {
-    background: linear-gradient(135deg, #03A9F4, #3F51B5);
+    background: linear-gradient(#8f8f8f);
     box-shadow: 0 4px 15px rgba(63, 81, 181, 0.4);
 }
 
