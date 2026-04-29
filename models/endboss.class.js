@@ -76,7 +76,7 @@ class Endboss extends MovableObject {
     }
     hit() {
         this.bossHitSound.play();
-        this.energy -= 40;
+        this.energy -= 20;
         if (this.energy <= 0) {
             this.energy = 0;
         } else {

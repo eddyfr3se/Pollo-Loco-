@@ -8,6 +8,7 @@ class World {
     statusBar = new StatusBar();
     statusBarCoin = new StatusBarCoin();
     statusBarBottle = new StatusBarBottle();
+    statusBarEndboss = new StatusBarEndboss();
     throwableObjects = [];
     lastThrowTime = 0;
     isGameOver = false;
@@ -111,6 +112,7 @@ class World {
                 if (enemy instanceof Endboss && bottle.isColliding(enemy) && !bottle.hasHit) {
                     enemy.hit();
                     bottle.hasHit = true;
+                    this.statusBarEndboss.setPercentage(enemy.energy);
                 }
             });
         });
@@ -124,6 +126,7 @@ class World {
         this.addToMap(this.statusBar);
         this.addToMap(this.statusBarCoin);
         this.addToMap(this.statusBarBottle);
+        this.drawEndbossStatusBar();
         this.ctx.translate(this.camera_x, 0);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.clouds);
@@ -137,6 +140,14 @@ class World {
             self.draw();
         });
     }
+
+    drawEndbossStatusBar() {
+        let endboss = this.level.enemies.find(e => e instanceof Endboss);
+        if (endboss && endboss.hadFirstContact) {
+            this.addToMap(this.statusBarEndboss);
+        }
+    }
+
 
     addObjectsToMap(objects) {
         objects.forEach(o => {
