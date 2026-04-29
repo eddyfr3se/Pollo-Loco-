@@ -10,6 +10,7 @@ class World {
     statusBarBottle = new StatusBarBottle();
     throwableObjects = [];
     lastThrowTime = 0;
+    isGameOver = false;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext("2d");
@@ -28,7 +29,27 @@ class World {
         setInterval(() => {
             this.checkCollisions();
             this.checkThrowObjects();
-        }, 30);
+            this.checkGameOver();
+        }, 20);
+    }
+
+    checkGameOver() {
+        if (!this.isGameOver) {
+            if (this.character.isDead()) {
+                this.isGameOver = true;
+                setTimeout(() => {
+                    if (typeof gameOver === 'function') gameOver(false);
+                }, 1000);
+            } else {
+                let endboss = this.level.enemies.find(e => e instanceof Endboss);
+                if (endboss && endboss.isDead()) {
+                    this.isGameOver = true;
+                    setTimeout(() => {
+                        if (typeof gameOver === 'function') gameOver(true);
+                    }, 2000);
+                }
+            }
+        }
     }
 
     checkCollisions() {
@@ -39,9 +60,10 @@ class World {
     }
 
     checkEnemyCollisions() {
+        let isJumpingOnEnemy = this.character.speedY < 0;
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy) && !enemy.isDead()) {
-                if (enemy instanceof Chicken && this.character.isAboveGround() && this.character.speedY < 0) {
+                if (enemy instanceof Chicken && this.character.isAboveGround() && isJumpingOnEnemy) {
                     enemy.hit();
                     this.character.jump();
                 } else {

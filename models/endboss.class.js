@@ -3,10 +3,11 @@ class Endboss extends MovableObject {
     height = 500;
     width = 300;
     y = -35;
-    speed = 5;
+    speed = 2.5;
     hadFirstContact = false;
     firstContactTime = 0;
     attackTimer = 0;
+    bossHitSound = new Audio('audio/boss sound.wav');
 
     IMAGES_ALERT = [
         'img/4_enemie_boss_chicken/2_alert/G5.png',
@@ -57,12 +58,24 @@ class Endboss extends MovableObject {
     }
 
     animate() {
+        // Bewegungs-Schleife (60 FPS für flüssiges Laufen statt ruckeln)
+        setInterval(() => {
+            if (this.hadFirstContact && !this.isDead() && !this.isHurt()) {
+                let timepassed = new Date().getTime() - this.firstContactTime;
+                // Endboss bewegt sich nur nach links, solange er in der Geh-Phase ist (Timer <= 10)
+                if (timepassed >= 3000 && this.attackTimer <= 10) {
+                    this.moveLeft();
+                }
+            }
+        }, 1000 / 60);
+
+        // Animations-Schleife (100ms statt 200ms -> Beine bewegen sich viel schneller!)
         setInterval(() => {
             this.handleBossState();
-        }, 200);
+        }, 100);
     }
-
     hit() {
+        this.bossHitSound.play();
         this.energy -= 40;
         if (this.energy <= 0) {
             this.energy = 0;
@@ -80,7 +93,6 @@ class Endboss extends MovableObject {
                 this.playAnimation(this.IMAGES_ALERT);
             } else {
                 this.playAttackOrWalk();
-                this.moveLeft();
             }
         } else this.checkFirstContact();
     }
@@ -94,7 +106,7 @@ class Endboss extends MovableObject {
 
     checkFirstContact() {
         this.playAnimation(this.IMAGES_ALERT);
-        if (world && world.character.x > 2500) {
+        if (world && world.character.x > 3100) {
             this.hadFirstContact = true;
             this.firstContactTime = new Date().getTime();
         }
