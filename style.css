@@ -204,3 +204,47 @@ canvas {
 .back-btn {
     margin-top: 30px;
 }
+
+.impressum-btn {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 5px 10px;
+    border-radius: 5px;
+    z-index: 100;
+    transition: background-color 0.2s;
+}
+
+.impressum-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* Impressum Styles */
+.impressum-container {
+    background-color: rgba(0, 0, 0, 0.85);
+    color: white;
+    padding: 40px;
+    border-radius: 10px;
+    max-width: 600px;
+    margin: auto;
+    text-align: left;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.impressum-container a {
+    color: #FF9800;
+}
+
+.impressum-container h1 {
+    color: #FF9800;
+}
+
+.back-btn-imp {
+    margin-top: 30px;
+    display: inline-block;
+    text-decoration: none;
+}
