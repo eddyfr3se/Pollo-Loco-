@@ -38,16 +38,31 @@ function bindBttnPressEvents() {
 }
 
 function startGame() {
+    document.body.classList.add('game-started');
     keyboard.LEFT = false;
     keyboard.RIGHT = false;
     keyboard.UP = false;
     keyboard.DOWN = false;
     keyboard.SPACE = false;
-    
+
     document.getElementById('startScreen').style.display = 'none';
     document.getElementById('instructionsPanel').style.display = 'none';
     document.getElementById('gameOverlay').style.display = 'flex';
     document.getElementById('mobileControls').classList.add('show-mobile');
+
+
+
+    if (window.matchMedia("(max-width: 1366px)").matches) {
+        let elem = document.getElementById('gameContainer');
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen().catch(e => console.log(e));
+        } else if (elem.webkitRequestFullscreen) {
+            elem.webkitRequestFullscreen();
+        }
+    }
+
+
+
     initLevel();
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
