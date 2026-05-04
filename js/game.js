@@ -51,18 +51,6 @@ function startGame() {
     document.getElementById('mobileControls').classList.add('show-mobile');
 
 
-
-    if (window.matchMedia("(max-width: 1366px)").matches) {
-        let elem = document.getElementById('gameContainer');
-        if (elem.requestFullscreen) {
-            elem.requestFullscreen().catch(e => console.log(e));
-        } else if (elem.webkitRequestFullscreen) {
-            elem.webkitRequestFullscreen();
-        }
-    }
-
-
-
     initLevel();
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);

@@ -1,11 +1,9 @@
-/* =========================================
-   1. GLOBAL STYLES
-   ========================================= */
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-color: #2a0808;
     background-image: url('img/9_intro_outro_screens/start/background.png');
     background-size: cover;
     background-position: center;
@@ -19,11 +17,10 @@ canvas {
     background-color: transparent;
 }
 
-
 .game-container {
     position: relative;
-    width: min(100vw, calc(100vh * 720 / 480), 720px);
-    height: min(100vh, calc(100vw * 480 / 720), 480px);
+    width: min(calc(100vw - 40px), calc((100vh - 40px) * 720 / 480), 720px);
+    height: min(calc(100vh - 40px), calc((100vw - 40px) * 480 / 720), 480px);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     border-radius: 10px;
     overflow: hidden;
@@ -41,7 +38,6 @@ canvas {
     height: 100%;
     object-fit: fill;
 }
-
 
 .button-container {
     display: flex;
@@ -212,11 +208,12 @@ canvas {
 }
 
 #gameOverlay {
-    display: none;
+    display: flex;
     position: absolute;
-    bottom: 10px;
-    right: 10px;
-    z-index: 5;
+    top: 10px;
+    right: 50%;
+    transform: translateX(50%);
+    z-index: 50;
 }
 
 .turn-device {
@@ -242,7 +239,11 @@ canvas {
     color: white;
     padding: 40px;
     border-radius: 10px;
+    width: 90%;
     max-width: 600px;
+    box-sizing: border-box;
+    max-height: 90vh;
+    overflow-y: auto;
     margin: auto;
     text-align: left;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
@@ -293,20 +294,21 @@ canvas {
     background-color: rgba(255, 255, 255, 0.5);
 }
 
+#fullscreenBtn {
+    display: none;
+}
+
+body.game-started #fullscreenBtn {
+    display: block;
+}
+
 
 @media (max-width: 1366px) and (pointer: coarse) {
     .show-mobile {
         display: flex;
     }
 
-    #gameOverlay {
-        right: 50%;
-        transform: translateX(50%);
-        top: 10px;
-        bottom: auto;
-    }
-
-    #gameOverlay button:nth-child(2) {
+    body.game-started #fullscreenBtn {
         display: none;
     }
 
