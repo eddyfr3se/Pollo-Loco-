@@ -7,7 +7,6 @@ class Endboss extends MovableObject {
     hadFirstContact = false;
     firstContactTime = 0;
     attackTimer = 0;
-    bossHitSound = new Audio('audio/boss sound.wav');
 
     IMAGES_ALERT = [
         'img/4_enemie_boss_chicken/2_alert/G5.png',
@@ -74,8 +73,9 @@ class Endboss extends MovableObject {
             this.handleBossState();
         }, 100);
     }
+
     hit() {
-        this.bossHitSound.play();
+        AudioHub.play(AudioHub.BOSS_HIT);
         this.energy -= 20;
         if (this.energy <= 0) {
             this.energy = 0;

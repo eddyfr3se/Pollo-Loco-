@@ -1,7 +1,6 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
-let backgroundMusic = new Audio('audio/Jump_Squawk_Repeat.mp3');
 let soundEnabled = true;
 
 function init() {
@@ -55,12 +54,10 @@ function startGame() {
 
 
 
-
     initLevel();
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
-    backgroundMusic.loop = true;
-    backgroundMusic.play();
+    AudioHub.play(AudioHub.BG_MUSIC);
     applySoundSettings();
     console.log('My Character is', world.character);
 }
@@ -115,8 +112,8 @@ function closeInstructions() {
 
 function gameOver(isWin) {
     clearAllIntervals();
-    backgroundMusic.pause();
-    backgroundMusic.currentTime = 0;
+    AudioHub.BG_MUSIC.pause();
+    AudioHub.BG_MUSIC.currentTime = 0;
     document.getElementById('endScreen').style.display = 'flex';
     let imgPath = isWin ? 'img/You won, you lost/You Win A.png' : 'img/You won, you lost/Game Over.png';
     document.getElementById('endScreenImage').src = imgPath;
@@ -149,13 +146,9 @@ function toggleSound() {
 }
 
 function applySoundSettings() {
-    backgroundMusic.muted = !soundEnabled;
-    if (world && world.character) world.character.characterHitSound.muted = !soundEnabled;
-    if (world && world.level) {
-        let boss = world.level.enemies.find(e => e instanceof Endboss);
-        if (boss) boss.bossHitSound.muted = !soundEnabled;
-    }
+    AudioHub.applySoundSettings(soundEnabled);
 }
+
 
 
 function toggleFullscreen() {

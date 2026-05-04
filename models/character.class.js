@@ -48,7 +48,6 @@ class Character extends MovableObject {
     coins = 0;
     bottles = 0;
     lastAction = 0;
-    characterHitSound = new Audio('audio/529346__fluxedmac__boss_vocalattack_3.wav');
     offset = {
         top: 120,
         bottom: 30,
@@ -58,7 +57,7 @@ class Character extends MovableObject {
 
     hit() {
         if (!this.isHurt()) {
-            this.characterHitSound.play();
+            AudioHub.play(AudioHub.CHAR_HIT);
         }
         super.hit();
     }
