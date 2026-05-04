@@ -57,7 +57,7 @@ class World {
         this.checkEnemyCollisions();
         this.checkCoinCollisions();
         this.checkBottleCollisions();
-        this.checkBottleBossCollisions();
+        this.checkBottleEnemyCollisions();
     }
 
     checkEnemyCollisions() {
@@ -107,14 +107,15 @@ class World {
         }
     }
 
-
-    checkBottleBossCollisions() {
+    checkBottleEnemyCollisions() {
         this.throwableObjects.forEach((bottle) => {
             this.level.enemies.forEach((enemy) => {
-                if (enemy instanceof Endboss && bottle.isColliding(enemy) && !bottle.hasHit) {
+                if (bottle.isColliding(enemy) && !bottle.hasHit && !enemy.isDead()) {
                     enemy.hit();
                     bottle.hasHit = true;
-                    this.statusBarEndboss.setPercentage(enemy.energy);
+                    if (enemy instanceof Endboss) {
+                        this.statusBarEndboss.setPercentage(enemy.energy);
+                    }
                 }
             });
         });
