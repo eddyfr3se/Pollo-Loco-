@@ -51,6 +51,11 @@ function startGame() {
     document.getElementById('mobileControls').classList.add('show-mobile');
 
 
+
+
+
+
+
     initLevel();
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
