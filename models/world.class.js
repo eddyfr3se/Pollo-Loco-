@@ -98,13 +98,15 @@ class World {
     checkThrowObjects() {
         let timepassed = new Date().getTime() - this.lastThrowTime;
         if (this.keyboard.SPACE && this.character.bottles > 0 && timepassed > 500) {
-            let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
+            let xPos = this.character.otherDirection ? this.character.x - 20 : this.character.x + 100;
+            let bottle = new ThrowableObject(xPos, this.character.y + 100, this.character.otherDirection);
             this.throwableObjects.push(bottle);
             this.character.bottles -= 10;
             this.statusBarBottle.setPercentage(this.character.bottles);
             this.lastThrowTime = new Date().getTime();
         }
     }
+
 
     checkBottleBossCollisions() {
         this.throwableObjects.forEach((bottle) => {

@@ -17,16 +17,18 @@ class ThrowableObject extends MovableObject {
 
     hasHit = false;
 
-    constructor(x, y) {
+    constructor(x, y, otherDirection) {
         super().loadImage(this.IMAGES_ROTATING[0]);
         this.loadImages(this.IMAGES_ROTATING);
         this.loadImages(this.IMAGES_SPLASH);
         this.x = x;
         this.y = y;
+        this.otherDirection = otherDirection;
         this.height = 60;
         this.width = 50;
         this.throw();
     }
+
 
     isAboveGround() {
         return true;
@@ -36,10 +38,15 @@ class ThrowableObject extends MovableObject {
         this.speedY = 30;
         this.applyGravity();
         let moveInterval = setInterval(() => {
-            this.x += 10;
+            if (this.otherDirection) {
+                this.x -= 10;
+            } else {
+                this.x += 10;
+            }
         }, 25);
         this.animate(moveInterval);
     }
+
 
     animate(moveInterval) {
         setInterval(() => {
