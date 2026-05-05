@@ -31,6 +31,7 @@ class World {
             this.checkCollisions();
             this.checkThrowObjects();
             this.checkGameOver();
+            this.removeDeadEnemies();
         }, 20);
     }
 
@@ -51,6 +52,16 @@ class World {
                 }
             }
         }
+    }
+
+    removeDeadEnemies() {
+        this.level.enemies = this.level.enemies.filter((enemy) => {
+            if (enemy instanceof Chicken && enemy.isDead()) {
+                let timepassed = new Date().getTime() - enemy.lastHit;
+                return timepassed < 1000;
+            }
+            return true;
+        });
     }
 
     checkCollisions() {

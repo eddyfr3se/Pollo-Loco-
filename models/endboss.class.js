@@ -57,18 +57,14 @@ class Endboss extends MovableObject {
     }
 
     animate() {
-        // Bewegungs-Schleife (60 FPS für flüssiges Laufen statt ruckeln)
         setInterval(() => {
             if (this.hadFirstContact && !this.isDead() && !this.isHurt()) {
                 let timepassed = new Date().getTime() - this.firstContactTime;
-                // Endboss bewegt sich nur nach links, solange er in der Geh-Phase ist (Timer <= 10)
                 if (timepassed >= 3000 && this.attackTimer <= 10) {
                     this.moveLeft();
                 }
             }
         }, 1000 / 60);
-
-        // Animations-Schleife (100ms statt 200ms -> Beine bewegen sich viel schneller!)
         setInterval(() => {
             this.handleBossState();
         }, 100);

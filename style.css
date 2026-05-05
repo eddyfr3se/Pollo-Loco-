@@ -302,6 +302,9 @@ body.game-started #fullscreenBtn {
     display: block;
 }
 
+body.game-started .impressum-btn {
+    display: none;
+}
 
 @media (max-width: 1366px) and (pointer: coarse) {
     .show-mobile {
@@ -341,7 +344,8 @@ body.game-started #fullscreenBtn {
     }
 }
 
-@media (max-width: 540px), (max-height: 480px) {
+@media (max-width: 540px),
+(max-height: 480px) {
     .button-container {
         flex-direction: column;
         align-items: center;
@@ -354,7 +358,8 @@ body.game-started #fullscreenBtn {
         font-size: 14px;
     }
 
-    #startScreen img, #endScreen img {
+    #startScreen img,
+    #endScreen img {
         max-height: 45%;
         margin-bottom: 10px;
     }

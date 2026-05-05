@@ -4,7 +4,7 @@ class ChickenSmall extends Chicken {
     width = 60;
     height = 60;
     offset = {
-        top: -20, // Macht die Hitbox oben größer, damit Pepe das Hit-Fenster nicht im Fallen überspringt
+        top: -20,
         left: 5,
         right: 5,
         bottom: 0
@@ -18,17 +18,14 @@ class ChickenSmall extends Chicken {
     IMAGE_DEAD = 'img/3_enemies_chicken/chicken_small/2_dead/dead.png';
 
     constructor(x) {
-        super(x); // Ruft Chicken() Konstruktor auf (inklusive animate, gravity, lastHit)
+        super(x);
         this.loadImage('img/3_enemies_chicken/chicken_small/1_walk/1_w.png');
         this.loadImages(this.IMAGES_WALKING);
-
         if (x !== undefined) {
             this.x = x + Math.random() * 50 - 25;
         } else {
             this.x = 800 + Math.random() * 2000;
         }
-
-        // Kleine Hühner sind nervig und deutlich schneller
         this.speed = 0.5 + Math.random() * 1.5;
     }
 }

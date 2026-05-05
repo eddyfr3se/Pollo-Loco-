@@ -49,8 +49,8 @@ class MovableObject extends DrawableObject {
     }
 
     isHurt() {
-        let timepassed = new Date().getTime() - this.lastHit; //differenz in ms
-        timepassed = timepassed / 1000; //differenz in s 
+        let timepassed = new Date().getTime() - this.lastHit;
+        timepassed = timepassed / 1000;
         return timepassed < 1;
     }
 
@@ -62,8 +62,7 @@ class MovableObject extends DrawableObject {
 
 
     playAnimation(images) {
-        //walk animation 
-        let i = this.currentImage % images.length;  ///lez i = 5 % 6; => 0; Rest 5
+        let i = this.currentImage % images.length;
         let path = images[i];
         this.img = this.imageCache[path];
         this.currentImage++;
@@ -73,7 +72,6 @@ class MovableObject extends DrawableObject {
 
     moveRight() {
         this.x += this.speed;
-
     }
 
     moveLeft() {
