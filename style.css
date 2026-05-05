@@ -350,7 +350,8 @@ body.game-started .impressum-btn {
   }
 }
 
-@media (max-width: 540px), (max-height: 480px) {
+@media (max-width: 540px),
+(max-height: 480px) {
   .button-container {
     flex-direction: column;
     align-items: center;

@@ -1,13 +1,10 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="icon"
-      type="image/png"
-      href="img/favicon/favicon-pollo-loco.png"
-    />
+    <link rel="icon" type="image/png" href="img/favicon/favicon-pollo-loco.png" />
     <link rel="stylesheet" href="style.css" />
     <script src="models/audio-hub.class.js"></script>
     <script src="models/drawable-object.class.js"></script>
@@ -31,85 +28,70 @@
     <script src="levels/level1.js"></script>
     <script src="js/game.js"></script>
     <title>EL Pollo De Loco</title>
-  </head>
+</head>
 
-  <body onload="init()">
+<body onload="init()">
     <div id="turnDeviceScreen" class="turn-device">
-      <p>Please rotate your device to landscape mode to play.</p>
+        <p>Please rotate your device to landscape mode to play.</p>
     </div>
 
     <div id="gameContainer" class="game-container">
-      <canvas id="canvas" width="720" height="480"></canvas>
+        <canvas id="canvas" width="720" height="480"></canvas>
 
-      <div id="mobileControls" class="mobile-controls">
-        <div class="left-controls">
-          <button id="btnLeft" class="mobile-btn">◀</button>
-          <button id="btnRight" class="mobile-btn">▶</button>
+        <div id="mobileControls" class="mobile-controls">
+            <div class="left-controls">
+                <button id="btnLeft" class="mobile-btn">◀</button>
+                <button id="btnRight" class="mobile-btn">▶</button>
+            </div>
+            <div class="right-controls">
+                <button id="btnJump" class="mobile-btn">▲</button>
+                <button id="btnThrow" class="mobile-btn">Space</button>
+            </div>
         </div>
-        <div class="right-controls">
-          <button id="btnJump" class="mobile-btn">▲</button>
-          <button id="btnThrow" class="mobile-btn">Space</button>
-        </div>
-      </div>
 
-      <div id="gameOverlay">
-        <button
-          class="overlay-btn"
-          id="soundBtn"
-          onclick="toggleSound()"
-          title="Sound On/Off"
-        >
-          🔊
-        </button>
-        <button
-          class="overlay-btn"
-          id="fullscreenBtn"
-          onclick="toggleFullscreen()"
-          title="Fullscreen"
-        >
-          ⛶
-        </button>
-      </div>
-      <div id="startScreen">
-        <img
-          src="img/9_intro_outro_screens/start/startbildschirm.png"
-          alt="Start Logo"
-        />
-        <div class="button-container">
-          <button class="btn" onclick="startGame()">START GAME</button>
-          <button class="btn btn-secondary" onclick="openInstructions()">
-            CONTROLS
-          </button>
+        <div id="gameOverlay">
+            <button class="overlay-btn" id="soundBtn" onclick="toggleSound()" title="Sound On/Off">
+                🔊
+            </button>
+            <button class="overlay-btn" id="fullscreenBtn" onclick="toggleFullscreen()" title="Fullscreen">
+                ⛶
+            </button>
         </div>
-      </div>
+        <div id="startScreen">
+            <img src="img/9_intro_outro_screens/start/startbildschirm.png" alt="Start Logo" />
+            <div class="button-container">
+                <button class="btn" onclick="startGame()">START GAME</button>
+                <button class="btn btn-secondary" onclick="openInstructions()">
+                    CONTROLS
+                </button>
+            </div>
+        </div>
 
-      <div id="instructionsPanel">
-        <h2>How to play El Pollo Loco:</h2>
-        <div class="keys">
-          <p><span>◀ / ▶</span> Move</p>
-          <p><span>▲</span> Jump</p>
-          <p><span>Space</span> Throw bottle</p>
+        <div id="instructionsPanel">
+            <h2>How to play El Pollo Loco:</h2>
+            <div class="keys">
+                <p><span>◀ / ▶</span> Move</p>
+                <p><span>▲</span> Jump</p>
+                <p><span>Space</span> Throw bottle</p>
+            </div>
+            <p class="instructions-desc">
+                Collect bottles and coins, and defeat the boss! If the boss runs you
+                over, you're dead!
+            </p>
+            <button class="btn btn-secondary back-btn" onclick="closeInstructions()">
+                BACK
+            </button>
         </div>
-        <p class="instructions-desc">
-          Collect bottles and coins, and defeat the boss! If the boss runs you
-          over, you're dead!
-        </p>
-        <button
-          class="btn btn-secondary back-btn"
-          onclick="closeInstructions()"
-        >
-          BACK
-        </button>
-      </div>
 
-      <div id="endScreen">
-        <img id="endScreenImage" src="" alt="End Screen" />
-        <div class="button-container">
-          <button class="btn" onclick="restartGame()">RESTART</button>
-          <button class="btn btn-secondary" onclick="goToHome()">HOME</button>
+        <div id="endScreen">
+            <img id="endScreenImage" src="" alt="End Screen" />
+            <div class="button-container">
+                <button class="btn" onclick="restartGame()">RESTART</button>
+                <button class="btn btn-secondary" onclick="goToHome()">HOME</button>
+            </div>
         </div>
-      </div>
     </div>
     <a href="impressum.html" class="impressum-btn">Impressum</a>
-  </body>
+</body>
+
 </html>
