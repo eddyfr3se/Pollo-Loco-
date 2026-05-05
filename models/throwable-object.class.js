@@ -1,3 +1,7 @@
+/**
+ * Represents the ThrowableObject.
+  * @class ThrowableObject
+ */
 class ThrowableObject extends MovableObject {
   IMAGES_ROTATING = [
     "img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png",
@@ -16,6 +20,12 @@ class ThrowableObject extends MovableObject {
 
   hasHit = false;
 
+  /**
+   * Initializes the instance.
+   * @param {any} x - The x parameter.
+   * @param {any} y - The y parameter.
+   * @param {any} otherDirection - The otherDirection parameter.
+   */
   constructor(x, y, otherDirection) {
     super().loadImage(this.IMAGES_ROTATING[0]);
     this.loadImages(this.IMAGES_ROTATING);
@@ -28,10 +38,16 @@ class ThrowableObject extends MovableObject {
     this.throw();
   }
 
+  /**
+   * Executes the isAboveGround method.
+   */
   isAboveGround() {
     return true;
   }
 
+  /**
+   * Executes the throw method.
+   */
   throw() {
     this.speedY = 30;
     this.applyGravity();
@@ -45,6 +61,10 @@ class ThrowableObject extends MovableObject {
     this.animate(moveInterval);
   }
 
+  /**
+   * Executes the animate method.
+   * @param {any} moveInterval - The moveInterval parameter.
+   */
   animate(moveInterval) {
     setInterval(() => {
       if (this.hasHit) {

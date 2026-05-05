@@ -1,3 +1,7 @@
+/**
+ * Represents the Chicken.
+  * @class Chicken
+ */
 class Chicken extends MovableObject {
   y = 350;
   width = 80;
@@ -17,6 +21,10 @@ class Chicken extends MovableObject {
   ];
   IMAGE_DEAD = "img/3_enemies_chicken/chicken_normal/2_dead/dead.png";
 
+  /**
+   * Initializes the instance.
+   * @param {any} x - The x parameter.
+   */
   constructor(x) {
     super().loadImage("img/3_enemies_chicken/chicken_normal/1_walk/1_w.png");
     this.loadImages(this.IMAGES_WALKING);
@@ -32,6 +40,9 @@ class Chicken extends MovableObject {
     this.animate();
   }
 
+  /**
+   * Executes the animate method.
+   */
   animate() {
     let moveInterval = setInterval(() => {
       if (!this.isDead()) this.moveLeft();

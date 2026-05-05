@@ -1,3 +1,7 @@
+/**
+ * Represents the Character.
+  * @class Character
+ */
 class Character extends MovableObject {
   height = 250;
   y = 180;
@@ -50,6 +54,9 @@ class Character extends MovableObject {
     right: 40,
   };
 
+  /**
+   * Executes the hit method.
+   */
   hit() {
     if (!this.isHurt()) {
       AudioHub.play(AudioHub.CHAR_HIT);
@@ -83,6 +90,9 @@ class Character extends MovableObject {
     "img/2_character_pepe/1_idle/long_idle/I-20.png",
   ];
 
+  /**
+   * Initializes the instance.
+   */
   constructor() {
     super();
     this.loadImage("img/2_character_pepe/1_idle/idle/I-1.png");
@@ -98,21 +108,33 @@ class Character extends MovableObject {
     this.animate();
   }
 
+  /**
+   * Executes the collectCoin method.
+   */
   collectCoin() {
     this.coins += 10;
     if (this.coins > 100) this.coins = 100;
   }
 
+  /**
+   * Executes the collectBottle method.
+   */
   collectBottle() {
     this.bottles += 10;
     if (this.bottles > 100) this.bottles = 100;
   }
 
+  /**
+   * Executes the animate method.
+   */
   animate() {
     setInterval(() => this.moveCharacter(), 1000 / 60);
     setInterval(() => this.playCharacterAnimations(), 100);
   }
 
+  /**
+   * Executes the moveCharacter method.
+   */
   moveCharacter() {
     if (this.world && this.world.keyboard) {
       if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
@@ -130,6 +152,9 @@ class Character extends MovableObject {
     }
   }
 
+  /**
+   * Executes the playCharacterAnimations method.
+   */
   playCharacterAnimations() {
     if (this.isDead()) {
       this.playAnimation(this.IMAGES_DEAD);
@@ -144,6 +169,9 @@ class Character extends MovableObject {
     }
   }
 
+  /**
+   * Executes the playGroundAnimations method.
+   */
   playGroundAnimations() {
     if (
       this.world &&
@@ -165,6 +193,9 @@ class Character extends MovableObject {
     }
   }
 
+  /**
+   * Executes the jump method.
+   */
   jump() {
     this.speedY = 30;
   }

@@ -4,6 +4,9 @@ let keyboard = new Keyboard();
 let soundEnabled =
   localStorage.getItem("soundEnabled") === "false" ? false : true;
 
+/**
+ * Executes the init function.
+ */
 function init() {
   bindBttnPressEvents();
   let icon = document.getElementById("soundBtn");
@@ -12,6 +15,9 @@ function init() {
   }
 }
 
+/**
+ * Executes the bindBttnPressEvents function.
+ */
 function bindBttnPressEvents() {
   bindMovementButtons();
   bindActionButtons();
@@ -21,6 +27,9 @@ function bindBttnPressEvents() {
   });
 }
 
+/**
+ * Executes the bindMovementButtons function.
+ */
 function bindMovementButtons() {
   let btnLeft = document.getElementById("btnLeft");
   let btnRight = document.getElementById("btnRight");
@@ -46,6 +55,9 @@ function bindMovementButtons() {
   }
 }
 
+/**
+ * Executes the bindActionButtons function.
+ */
 function bindActionButtons() {
   let btnJump = document.getElementById("btnJump");
   let btnThrow = document.getElementById("btnThrow");
@@ -71,6 +83,9 @@ function bindActionButtons() {
   }
 }
 
+/**
+ * Executes the startGame function.
+ */
 function startGame() {
   document.body.classList.add("game-started");
   resetKeyboard();
@@ -79,6 +94,9 @@ function startGame() {
   checkMobileFullscreen();
 }
 
+/**
+ * Executes the resetKeyboard function.
+ */
 function resetKeyboard() {
   keyboard.LEFT = false;
   keyboard.RIGHT = false;
@@ -87,6 +105,9 @@ function resetKeyboard() {
   keyboard.SPACE = false;
 }
 
+/**
+ * Executes the updateUIForGameStart function.
+ */
 function updateUIForGameStart() {
   document.getElementById("startScreen").style.display = "none";
   document.getElementById("instructionsPanel").style.display = "none";
@@ -94,6 +115,9 @@ function updateUIForGameStart() {
   document.getElementById("mobileControls").classList.add("show-mobile");
 }
 
+/**
+ * Executes the initWorldAndAudio function.
+ */
 function initWorldAndAudio() {
   initLevel();
   canvas = document.getElementById("canvas");
@@ -102,6 +126,9 @@ function initWorldAndAudio() {
   applySoundSettings();
 }
 
+/**
+ * Executes the checkMobileFullscreen function.
+ */
 function checkMobileFullscreen() {
   if (window.matchMedia("(max-width: 1366px) and (pointer: coarse)").matches) {
     let elem = document.getElementById("gameContainer");
@@ -149,16 +176,26 @@ window.addEventListener("keyup", (e) => {
   }
 });
 
+/**
+ * Executes the openInstructions function.
+ */
 function openInstructions() {
   document.getElementById("startScreen").style.display = "none";
   document.getElementById("instructionsPanel").style.display = "flex";
 }
 
+/**
+ * Executes the closeInstructions function.
+ */
 function closeInstructions() {
   document.getElementById("instructionsPanel").style.display = "none";
   document.getElementById("startScreen").style.display = "flex";
 }
 
+/**
+ * Executes the gameOver function.
+ * @param {any} isWin - The isWin parameter.
+ */
 function gameOver(isWin) {
   clearAllIntervals();
   AudioHub.BG_MUSIC.pause();
@@ -170,19 +207,31 @@ function gameOver(isWin) {
   document.getElementById("endScreenImage").src = imgPath;
 }
 
+/**
+ * Executes the clearAllIntervals function.
+ */
 function clearAllIntervals() {
   for (let i = 1; i < 9999; i++) window.clearInterval(i);
 }
 
+/**
+ * Executes the restartGame function.
+ */
 function restartGame() {
   document.getElementById("endScreen").style.display = "none";
   startGame();
 }
 
+/**
+ * Executes the goToHome function.
+ */
 function goToHome() {
   window.location.reload();
 }
 
+/**
+ * Executes the toggleSound function.
+ */
 function toggleSound() {
   if (document.activeElement) document.activeElement.blur();
   soundEnabled = !soundEnabled;
@@ -196,10 +245,16 @@ function toggleSound() {
   applySoundSettings();
 }
 
+/**
+ * Executes the applySoundSettings function.
+ */
 function applySoundSettings() {
   AudioHub.applySoundSettings(soundEnabled);
 }
 
+/**
+ * Executes the toggleFullscreen function.
+ */
 function toggleFullscreen() {
   if (document.activeElement) document.activeElement.blur();
   let elem = document.getElementById("gameContainer");

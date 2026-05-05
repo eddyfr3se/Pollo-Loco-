@@ -1,3 +1,7 @@
+/**
+ * Represents the ChickenSmall.
+  * @class ChickenSmall
+ */
 class ChickenSmall extends Chicken {
   y = 370;
   width = 60;
@@ -16,6 +20,10 @@ class ChickenSmall extends Chicken {
   ];
   IMAGE_DEAD = "img/3_enemies_chicken/chicken_small/2_dead/dead.png";
 
+  /**
+   * Initializes the instance.
+   * @param {any} x - The x parameter.
+   */
   constructor(x) {
     super(x);
     this.loadImage("img/3_enemies_chicken/chicken_small/1_walk/1_w.png");

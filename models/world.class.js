@@ -1,3 +1,7 @@
+/**
+ * Represents the World.
+  * @class World
+ */
 class World {
   character = new Character();
   level = level1;
@@ -13,6 +17,11 @@ class World {
   lastThrowTime = 0;
   isGameOver = false;
 
+  /**
+   * Initializes the instance.
+   * @param {any} canvas - The canvas parameter.
+   * @param {any} keyboard - The keyboard parameter.
+   */
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
@@ -22,10 +31,16 @@ class World {
     this.run();
   }
 
+  /**
+   * Executes the setWorld method.
+   */
   setWorld() {
     this.character.world = this;
   }
 
+  /**
+   * Executes the run method.
+   */
   run() {
     setInterval(() => {
       this.checkCollisions();
@@ -35,6 +50,9 @@ class World {
     }, 20);
   }
 
+  /**
+   * Executes the checkGameOver method.
+   */
   checkGameOver() {
     if (!this.isGameOver) {
       if (this.character.isDead()) {
@@ -54,6 +72,9 @@ class World {
     }
   }
 
+  /**
+   * Executes the removeDeadEnemies method.
+   */
   removeDeadEnemies() {
     this.level.enemies = this.level.enemies.filter((enemy) => {
       if (enemy instanceof Chicken && enemy.isDead()) {
@@ -64,6 +85,9 @@ class World {
     });
   }
 
+  /**
+   * Executes the checkCollisions method.
+   */
   checkCollisions() {
     this.checkEnemyCollisions();
     this.checkCoinCollisions();
@@ -72,6 +96,9 @@ class World {
     this.checkBossOverrun();
   }
 
+  /**
+   * Executes the checkBossOverrun method.
+   */
   checkBossOverrun() {
     let endboss = this.level.enemies.find((e) => e instanceof Endboss);
     if (endboss && !endboss.isDead() && !this.character.isDead()) {
@@ -82,6 +109,9 @@ class World {
     }
   }
 
+  /**
+   * Executes the checkEnemyCollisions method.
+   */
   checkEnemyCollisions() {
     let isJumpingOnEnemy = this.character.speedY < 0;
     this.level.enemies.forEach((enemy) => {
@@ -101,6 +131,9 @@ class World {
     });
   }
 
+  /**
+   * Executes the checkCoinCollisions method.
+   */
   checkCoinCollisions() {
     this.level.coins.forEach((coin, index) => {
       if (this.character.isColliding(coin)) {
@@ -111,6 +144,9 @@ class World {
     });
   }
 
+  /**
+   * Executes the checkBottleCollisions method.
+   */
   checkBottleCollisions() {
     this.level.bottles.forEach((bottle, index) => {
       if (this.character.isColliding(bottle)) {
@@ -121,6 +157,9 @@ class World {
     });
   }
 
+  /**
+   * Executes the checkThrowObjects method.
+   */
   checkThrowObjects() {
     let timepassed = new Date().getTime() - this.lastThrowTime;
     if (this.keyboard.SPACE && this.character.bottles > 0 && timepassed > 500) {
@@ -139,6 +178,9 @@ class World {
     }
   }
 
+  /**
+   * Executes the checkBottleEnemyCollisions method.
+   */
   checkBottleEnemyCollisions() {
     this.throwableObjects.forEach((bottle) => {
       this.level.enemies.forEach((enemy) => {
@@ -153,6 +195,9 @@ class World {
     });
   }
 
+  /**
+   * Executes the draw method.
+   */
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.translate(this.camera_x, 0);
@@ -169,6 +214,9 @@ class World {
     });
   }
 
+  /**
+   * Executes the drawFixedObjects method.
+   */
   drawFixedObjects() {
     this.addToMap(this.statusBar);
     this.addToMap(this.statusBarCoin);
@@ -176,6 +224,9 @@ class World {
     this.drawEndbossStatusBar();
   }
 
+  /**
+   * Executes the drawDynamicObjects method.
+   */
   drawDynamicObjects() {
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.enemies);
@@ -184,6 +235,9 @@ class World {
     this.addObjectsToMap(this.throwableObjects);
   }
 
+  /**
+   * Executes the drawEndbossStatusBar method.
+   */
   drawEndbossStatusBar() {
     let endboss = this.level.enemies.find((e) => e instanceof Endboss);
     if (endboss && endboss.hadFirstContact) {
@@ -191,18 +245,30 @@ class World {
     }
   }
 
+  /**
+   * Executes the addObjectsToMap method.
+   * @param {any} objects - The objects parameter.
+   */
   addObjectsToMap(objects) {
     objects.forEach((o) => {
       this.addToMap(o);
     });
   }
 
+  /**
+   * Executes the addToMap method.
+   * @param {any} mo - The mo parameter.
+   */
   addToMap(mo) {
     if (mo.otherDirection) this.flipImage(mo);
     mo.draw(this.ctx);
     if (mo.otherDirection) this.flipImageBack(mo);
   }
 
+  /**
+   * Executes the flipImage method.
+   * @param {any} mo - The mo parameter.
+   */
   flipImage(mo) {
     this.ctx.save();
     this.ctx.translate(mo.width, 0);
@@ -210,6 +276,10 @@ class World {
     mo.x = mo.x * -1;
   }
 
+  /**
+   * Executes the flipImageBack method.
+   * @param {any} mo - The mo parameter.
+   */
   flipImageBack(mo) {
     mo.x = mo.x * -1;
     this.ctx.restore();

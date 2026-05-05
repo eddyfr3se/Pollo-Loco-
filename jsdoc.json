@@ -1,0 +1,10 @@
+{
+  "source": {
+    "include": ["js", "models", "levels"],
+    "includePattern": ".+\\.js(doc|x)?$",
+    "excludePattern": "(^|\\/|\\\\)_"
+  },
+  "opts": {
+    "destination": "./out"
+  }
+}
