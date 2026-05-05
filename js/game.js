@@ -1,10 +1,14 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
-let soundEnabled = true;
+let soundEnabled = localStorage.getItem('soundEnabled') === 'false' ? false : true;
 
 function init() {
     bindBttnPressEvents();
+    let icon = document.getElementById('soundBtn');
+    if (icon) {
+        icon.innerText = soundEnabled ? '🔊' : '🔇';
+    }
 }
 
 function bindBttnPressEvents() {
@@ -38,29 +42,41 @@ function bindBttnPressEvents() {
 
 function startGame() {
     document.body.classList.add('game-started');
+    resetKeyboard();
+    updateUIForGameStart();
+    initWorldAndAudio();
+    checkMobileFullscreen();
+}
+
+function resetKeyboard() {
     keyboard.LEFT = false;
     keyboard.RIGHT = false;
     keyboard.UP = false;
     keyboard.DOWN = false;
     keyboard.SPACE = false;
+}
 
+function updateUIForGameStart() {
     document.getElementById('startScreen').style.display = 'none';
     document.getElementById('instructionsPanel').style.display = 'none';
     document.getElementById('gameOverlay').style.display = 'flex';
     document.getElementById('mobileControls').classList.add('show-mobile');
+}
 
-
+function initWorldAndAudio() {
     initLevel();
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
     AudioHub.play(AudioHub.BG_MUSIC);
     applySoundSettings();
-    console.log('My Character is', world.character);
+}
+
+function checkMobileFullscreen() {
     if (window.matchMedia("(max-width: 1366px) and (pointer: coarse)").matches) {
         let elem = document.getElementById('gameContainer');
         if (elem.requestFullscreen) {
             elem.requestFullscreen().catch(err => console.log(err));
-        } else if (elem.webkitRequestFullscreen) { 
+        } else if (elem.webkitRequestFullscreen) {
             elem.webkitRequestFullscreen();
         }
     }
@@ -140,6 +156,7 @@ function goToHome() {
 function toggleSound() {
     if (document.activeElement) document.activeElement.blur();
     soundEnabled = !soundEnabled;
+    localStorage.setItem('soundEnabled', soundEnabled);
     let icon = document.getElementById('soundBtn');
     if (soundEnabled) {
         icon.innerText = '🔊';
