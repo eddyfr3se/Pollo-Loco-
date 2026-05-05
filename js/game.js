@@ -50,16 +50,20 @@ function startGame() {
     document.getElementById('mobileControls').classList.add('show-mobile');
 
 
-
-
-
-
     initLevel();
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
     AudioHub.play(AudioHub.BG_MUSIC);
     applySoundSettings();
     console.log('My Character is', world.character);
+    if (window.matchMedia("(max-width: 1366px) and (pointer: coarse)").matches) {
+        let elem = document.getElementById('gameContainer');
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen().catch(err => console.log(err));
+        } else if (elem.webkitRequestFullscreen) { 
+            elem.webkitRequestFullscreen();
+        }
+    }
 }
 
 window.addEventListener("keydown", (e) => {

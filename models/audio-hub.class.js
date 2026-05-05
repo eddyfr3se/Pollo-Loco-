@@ -6,10 +6,8 @@ class AudioHub {
     static allSounds = [AudioHub.BG_MUSIC, AudioHub.BOSS_HIT, AudioHub.CHAR_HIT];
 
     static play(sound) {
-        if (!sound.muted) {
-            sound.currentTime = 0;
-            sound.play().catch(e => console.log('Audio play failed:', e));
-        }
+        sound.currentTime = 0;
+        sound.play().catch(e => console.log('Audio play failed:', e));
     }
 
     static applySoundSettings(enabled) {

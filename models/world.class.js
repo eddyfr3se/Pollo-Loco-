@@ -58,6 +58,17 @@ class World {
         this.checkCoinCollisions();
         this.checkBottleCollisions();
         this.checkBottleEnemyCollisions();
+        this.checkBossOverrun();
+    }
+
+    checkBossOverrun() {
+        let endboss = this.level.enemies.find(e => e instanceof Endboss);
+        if (endboss && !endboss.isDead() && !this.character.isDead()) {
+            if (endboss.x + (endboss.width / 2) < this.character.x) {
+                this.character.energy = 0;
+                this.statusBar.setPercentage(0);
+            }
+        }
     }
 
     checkEnemyCollisions() {
@@ -74,6 +85,7 @@ class World {
             }
         });
     }
+
 
     checkCoinCollisions() {
         this.level.coins.forEach((coin, index) => {
