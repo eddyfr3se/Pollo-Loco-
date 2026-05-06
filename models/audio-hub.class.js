@@ -8,11 +8,13 @@ class AudioHub {
   static CHAR_HIT = new Audio(
     "audio/529346__fluxedmac__boss_vocalattack_3.wav",
   );
+  static CHAR_RUN = new Audio("audio/sounds/character/characterRun.mp3");
+  static CHAR_JUMP = new Audio("audio/sounds/character/characterJump.wav");
 
   /**
    * Array containing all audio instances.
    */
-  static allSounds = [AudioHub.BG_MUSIC, AudioHub.BOSS_HIT, AudioHub.CHAR_HIT];
+  static allSounds = [AudioHub.BG_MUSIC, AudioHub.BOSS_HIT, AudioHub.CHAR_HIT, AudioHub.CHAR_RUN, AudioHub.CHAR_JUMP];
 
   /**
    * Plays a given audio instance from the beginning.
@@ -35,3 +37,4 @@ class AudioHub {
 }
 
 AudioHub.BG_MUSIC.loop = true;
+AudioHub.CHAR_RUN.loop = true;

@@ -132,23 +132,38 @@ class Character extends MovableObject {
     setInterval(() => this.playCharacterAnimations(), 100);
   }
 
+
   /**
    * Executes the moveCharacter method.
    */
   moveCharacter() {
+    AudioHub.CHAR_RUN.pause();
     if (this.world && this.world.keyboard) {
-      if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-        this.moveRight();
-        this.otherDirection = false;
-      }
-      if (this.world.keyboard.LEFT && this.x > 0) {
-        this.moveLeft();
-        this.otherDirection = true;
-      }
-      if (this.world.keyboard.UP && !this.isAboveGround()) {
-        this.jump();
-      }
+      this.handleMovement();
       this.world.camera_x = -this.x + 50;
+    }
+  }
+
+  /**
+   * Executes the handleMovement method.
+   */
+  handleMovement() {
+    if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+      this.moveRight();
+      this.otherDirection = false;
+      if (!this.isAboveGround()) {
+        AudioHub.CHAR_RUN.play();
+      }
+    }
+    if (this.world.keyboard.LEFT && this.x > 0) {
+      this.moveLeft();
+      this.otherDirection = true;
+      if (!this.isAboveGround()) {
+        AudioHub.CHAR_RUN.play();
+      }
+    }
+    if (this.world.keyboard.UP && !this.isAboveGround()) {
+      this.jump();
     }
   }
 
@@ -198,5 +213,6 @@ class Character extends MovableObject {
    */
   jump() {
     this.speedY = 30;
+    AudioHub.play(AudioHub.CHAR_JUMP);
   }
 }
