@@ -8,7 +8,7 @@ class Level {
   backgroundObjects;
   coins;
   bottles;
-  level_end_x = 3300;
+  level_end_x = 5450;
 
   /**
    * Initializes the instance.
