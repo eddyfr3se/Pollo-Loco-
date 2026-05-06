@@ -15,7 +15,7 @@ class StatusBar extends DrawableObject {
   percentage = 100;
 
   /**
-   * Initializes the instance.
+   * Initializes the status bar and sets the initial percentage.
    */
   constructor() {
     super();
@@ -28,8 +28,8 @@ class StatusBar extends DrawableObject {
   }
 
   /**
-   * Executes the setPercentage method.
-   * @param {any} percentage - The percentage parameter.
+   * Sets the percentage and updates the status bar image.
+   * @param {any} percentage - The new percentage.
    */
   setPercentage(percentage) {
     this.percentage = percentage;
@@ -38,7 +38,7 @@ class StatusBar extends DrawableObject {
   }
 
   /**
-   * Executes the resolveImageIndex method.
+   * Resolves the image index based on the current percentage.
    */
   resolveImageIndex() {
     if (this.percentage == 100) {

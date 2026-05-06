@@ -17,7 +17,7 @@ class MovableObject extends DrawableObject {
   };
 
   /**
-   * Executes the applyGravity method.
+   * Applies gravity to the object, making it fall or jump.
    */
   applyGravity() {
     setInterval(() => {
@@ -29,15 +29,15 @@ class MovableObject extends DrawableObject {
   }
 
   /**
-   * Executes the isAboveGround method.
+   * Checks if the object is above the ground level.
    */
   isAboveGround() {
     return this.y < 180;
   }
 
   /**
-   * Executes the isColliding method.
-   * @param {any} mo - The mo parameter.
+   * Checks if this object collides with another object.
+   * @param {any} mo - The other object.
    */
   isColliding(mo) {
     return (
@@ -49,7 +49,7 @@ class MovableObject extends DrawableObject {
   }
 
   /**
-   * Executes the hit method.
+   * Handles the object taking damage and updates energy.
    */
   hit() {
     if (!this.isHurt()) {
@@ -63,7 +63,7 @@ class MovableObject extends DrawableObject {
   }
 
   /**
-   * Executes the isHurt method.
+   * Checks if the object is currently hurt (recently hit).
    */
   isHurt() {
     let timepassed = new Date().getTime() - this.lastHit;
@@ -72,15 +72,15 @@ class MovableObject extends DrawableObject {
   }
 
   /**
-   * Executes the isDead method.
+   * Checks if the object is dead (energy is zero).
    */
   isDead() {
     return this.energy == 0;
   }
 
   /**
-   * Executes the playAnimation method.
-   * @param {any} images - The images parameter.
+   * Plays the object's animation by cycling through images.
+   * @param {any} images - The animation images.
    */
   playAnimation(images) {
     let i = this.currentImage % images.length;
@@ -90,21 +90,21 @@ class MovableObject extends DrawableObject {
   }
 
   /**
-   * Executes the moveRight method.
+   * Moves the object to the right.
    */
   moveRight() {
     this.x += this.speed;
   }
 
   /**
-   * Executes the moveLeft method.
+   * Moves the object to the left.
    */
   moveLeft() {
     this.x -= this.speed;
   }
 
   /**
-   * Executes the jump method.
+   * Makes the object jump by setting upward speed.
    */
   jump() {
     this.speedY = 30;

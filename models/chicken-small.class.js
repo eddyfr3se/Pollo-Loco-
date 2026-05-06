@@ -21,8 +21,8 @@ class ChickenSmall extends Chicken {
   IMAGE_DEAD = "img/3_enemies_chicken/chicken_small/2_dead/dead.png";
 
   /**
-   * Initializes the instance.
-   * @param {any} x - The x parameter.
+   * Initializes the small chicken at a given position.
+   * @param {any} x - The x position.
    */
   constructor(x) {
     super(x);

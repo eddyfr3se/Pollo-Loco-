@@ -9,11 +9,17 @@ class Bottle extends MovableObject {
     "img/6_salsa_bottle/1_salsa_bottle_on_ground.png",
     "img/6_salsa_bottle/2_salsa_bottle_on_ground.png",
   ];
+  offset = {
+    top: 15,
+    left: 20,
+    right: 20,
+    bottom: 10
+  };
 
   /**
-   * Initializes the instance.
-   * @param {any} x - The x parameter.
-   * @param {any} y - The y parameter.
+   * Initializes the bottle at a given position and starts animation.
+   * @param {any} x - The x position.
+   * @param {any} y - The y position.
    */
   constructor(x, y) {
     super().loadImage(this.IMAGES[0]);
@@ -24,7 +30,7 @@ class Bottle extends MovableObject {
   }
 
   /**
-   * Executes the animate method.
+   * Animates the bottle by cycling through images.
    */
   animate() {
     setInterval(() => {

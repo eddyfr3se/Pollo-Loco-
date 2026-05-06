@@ -55,7 +55,7 @@ class Character extends MovableObject {
   };
 
   /**
-   * Executes the hit method.
+   * Handles the character taking damage and plays hit sound.
    */
   hit() {
     if (!this.isHurt()) {
@@ -91,7 +91,7 @@ class Character extends MovableObject {
   ];
 
   /**
-   * Initializes the instance.
+   * Initializes the character, loads all images, and starts animation.
    */
   constructor() {
     super();
@@ -109,7 +109,7 @@ class Character extends MovableObject {
   }
 
   /**
-   * Executes the collectCoin method.
+   * Increases the coin count when a coin is collected.
    */
   collectCoin() {
     this.coins += 10;
@@ -117,7 +117,7 @@ class Character extends MovableObject {
   }
 
   /**
-   * Executes the collectBottle method.
+   * Increases the bottle count when a bottle is collected.
    */
   collectBottle() {
     this.bottles += 10;
@@ -125,7 +125,7 @@ class Character extends MovableObject {
   }
 
   /**
-   * Executes the animate method.
+   * Starts the character's movement and animation intervals.
    */
   animate() {
     setInterval(() => this.moveCharacter(), 1000 / 60);
@@ -134,7 +134,7 @@ class Character extends MovableObject {
 
 
   /**
-   * Executes the moveCharacter method.
+   * Moves the character based on keyboard input and updates camera.
    */
   moveCharacter() {
     AudioHub.CHAR_RUN.pause();
@@ -145,7 +145,7 @@ class Character extends MovableObject {
   }
 
   /**
-   * Executes the handleMovement method.
+   * Handles left, right, and jump movement logic.
    */
   handleMovement() {
     if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
@@ -168,7 +168,7 @@ class Character extends MovableObject {
   }
 
   /**
-   * Executes the playCharacterAnimations method.
+   * Plays the correct animation based on character state (dead, hurt, jumping, idle, etc.).
    */
   playCharacterAnimations() {
     if (this.isDead()) {
@@ -185,7 +185,7 @@ class Character extends MovableObject {
   }
 
   /**
-   * Executes the playGroundAnimations method.
+   * Plays walking or idle/long idle animations depending on movement and inactivity.
    */
   playGroundAnimations() {
     if (
@@ -209,7 +209,7 @@ class Character extends MovableObject {
   }
 
   /**
-   * Executes the jump method.
+   * Makes the character jump and plays jump sound.
    */
   jump() {
     this.speedY = 30;

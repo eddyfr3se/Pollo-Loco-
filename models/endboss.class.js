@@ -49,7 +49,7 @@ class Endboss extends MovableObject {
   ];
 
   /**
-   * Initializes the instance.
+   * Initializes the endboss, loads all images, and starts animation.
    */
   constructor() {
     super().loadImage(this.IMAGES_ALERT[0]);
@@ -63,7 +63,7 @@ class Endboss extends MovableObject {
   }
 
   /**
-   * Executes the animate method.
+   * Starts the endboss movement and state animation intervals.
    */
   animate() {
     setInterval(() => {
@@ -80,7 +80,7 @@ class Endboss extends MovableObject {
   }
 
   /**
-   * Executes the hit method.
+   * Handles the endboss taking damage and plays hit sound.
    */
   hit() {
     AudioHub.play(AudioHub.BOSS_HIT);
@@ -93,7 +93,7 @@ class Endboss extends MovableObject {
   }
 
   /**
-   * Executes the handleBossState method.
+   * Handles the endboss animation state (dead, hurt, alert, attack, walk).
    */
   handleBossState() {
     if (this.isDead()) this.playAnimation(this.IMAGES_DEAD);
@@ -109,7 +109,7 @@ class Endboss extends MovableObject {
   }
 
   /**
-   * Executes the playAttackOrWalk method.
+   * Switches between attack and walking animations based on timer.
    */
   playAttackOrWalk() {
     this.attackTimer++;
@@ -119,7 +119,7 @@ class Endboss extends MovableObject {
   }
 
   /**
-   * Executes the checkFirstContact method.
+   * Checks if the player reached the boss and triggers first contact.
    */
   checkFirstContact() {
     this.playAnimation(this.IMAGES_ALERT);
