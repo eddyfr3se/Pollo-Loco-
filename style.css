@@ -143,7 +143,7 @@ canvas {
 
 .instructions-desc {
   margin-top: 20px;
-  font-size: 14px;
+  font-size: 20px;
   color: #ccc;
 }
 
@@ -196,7 +196,7 @@ canvas {
 }
 
 #instructionsPanel h2 {
-  font-size: 32px;
+  font-size: 40px;
   margin-bottom: 30px;
   color: #ff9800;
 }
@@ -252,24 +252,37 @@ canvas {
 .impressum-container {
   background-color: rgba(0, 0, 0, 0.85);
   color: white;
-  padding: 40px;
+  padding: 30px;
   border-radius: 10px;
   width: 90%;
-  max-width: 600px;
+  max-width: 800px;
   box-sizing: border-box;
   max-height: 90vh;
-  overflow-y: auto;
   margin: auto;
   text-align: left;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  font-family: Arial, sans-serif;
 }
 
 .impressum-container h1 {
+  font-size: 28px;
   color: #ff9800;
+  margin-bottom: 15px;
+}
+
+.impressum-container p {
+  font-size: 16px;
+  line-height: 1.4;
+  margin-bottom: 10px;
 }
 
 .impressum-container a {
   color: #ff9800;
+  text-decoration: none;
+}
+
+.impressum-container a:hover {
+  text-decoration: underline;
 }
 
 .mobile-controls {
