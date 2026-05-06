@@ -18,9 +18,9 @@ class World {
   isGameOver = false;
 
   /**
-   * Initializes the instance.
-   * @param {any} canvas - The canvas parameter.
-   * @param {any} keyboard - The keyboard parameter.
+   * Creates a new game world, connects canvas and keyboard, starts drawing and game logic.
+   * @param {any} canvas - The game canvas element.
+   * @param {any} keyboard - The keyboard controls.
    */
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -32,14 +32,14 @@ class World {
   }
 
   /**
-   * Executes the setWorld method.
+   * Links the character to this world instance.
    */
   setWorld() {
     this.character.world = this;
   }
 
   /**
-   * Executes the run method.
+   * Starts the main game loop (collisions, throws, game over, remove enemies).
    */
   run() {
     setInterval(() => {
@@ -51,7 +51,7 @@ class World {
   }
 
   /**
-   * Executes the checkGameOver method.
+   * Checks if the game is over (win or lose).
    */
   checkGameOver() {
     if (!this.isGameOver) {
@@ -73,7 +73,7 @@ class World {
   }
 
   /**
-   * Executes the removeDeadEnemies method.
+   * Removes dead chickens from the game after 1 second.
    */
   removeDeadEnemies() {
     this.level.enemies = this.level.enemies.filter((enemy) => {
@@ -86,7 +86,7 @@ class World {
   }
 
   /**
-   * Executes the checkCollisions method.
+   * Checks all collisions (enemies, coins, bottles, boss, etc.).
    */
   checkCollisions() {
     this.checkEnemyCollisions();
@@ -97,7 +97,7 @@ class World {
   }
 
   /**
-   * Executes the checkBossOverrun method.
+   * Checks if the endboss passes the player and sets energy to 0 if so.
    */
   checkBossOverrun() {
     let endboss = this.level.enemies.find((e) => e instanceof Endboss);
@@ -110,7 +110,7 @@ class World {
   }
 
   /**
-   * Executes the checkEnemyCollisions method.
+   * Checks if the character collides with an enemy and handles hit or jump on enemy.
    */
   checkEnemyCollisions() {
     let isJumpingOnEnemy = this.character.speedY < 0;
@@ -132,7 +132,7 @@ class World {
   }
 
   /**
-   * Executes the checkCoinCollisions method.
+   * Checks if the character collects a coin and updates the display.
    */
   checkCoinCollisions() {
     this.level.coins.forEach((coin, index) => {
@@ -145,7 +145,7 @@ class World {
   }
 
   /**
-   * Executes the checkBottleCollisions method.
+   * Checks if the character collects a bottle and updates the display.
    */
   checkBottleCollisions() {
     this.level.bottles.forEach((bottle, index) => {
@@ -158,7 +158,7 @@ class World {
   }
 
   /**
-   * Executes the checkThrowObjects method.
+   * Checks if the player throws a bottle and creates a new throwable object if so.
    */
   checkThrowObjects() {
     let timepassed = new Date().getTime() - this.lastThrowTime;
@@ -179,7 +179,7 @@ class World {
   }
 
   /**
-   * Executes the checkBottleEnemyCollisions method.
+   * Checks if thrown bottles hit enemies and handles hits.
    */
   checkBottleEnemyCollisions() {
     this.throwableObjects.forEach((bottle) => {
@@ -196,7 +196,7 @@ class World {
   }
 
   /**
-   * Executes the draw method.
+   * Draws the entire game world and all objects (game loop).
    */
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -215,7 +215,7 @@ class World {
   }
 
   /**
-   * Executes the drawFixedObjects method.
+   * Draws the fixed status bars (health, coins, bottles, endboss).
    */
   drawFixedObjects() {
     this.addToMap(this.statusBar);
@@ -225,7 +225,7 @@ class World {
   }
 
   /**
-   * Executes the drawDynamicObjects method.
+   * Draws all dynamic objects (character, enemies, coins, bottles, throws).
    */
   drawDynamicObjects() {
     this.addToMap(this.character);
@@ -236,7 +236,7 @@ class World {
   }
 
   /**
-   * Executes the drawEndbossStatusBar method.
+   * Draws the endboss health bar if the boss has been activated.
    */
   drawEndbossStatusBar() {
     let endboss = this.level.enemies.find((e) => e instanceof Endboss);
@@ -246,8 +246,8 @@ class World {
   }
 
   /**
-   * Executes the addObjectsToMap method.
-   * @param {any} objects - The objects parameter.
+   * Draws a list of objects on the canvas.
+   * @param {any} objects - The objects to draw.
    */
   addObjectsToMap(objects) {
     objects.forEach((o) => {
@@ -256,8 +256,8 @@ class World {
   }
 
   /**
-   * Executes the addToMap method.
-   * @param {any} mo - The mo parameter.
+   * Draws a single object on the canvas (mirrored if needed).
+   * @param {any} mo - The object to draw.
    */
   addToMap(mo) {
     if (mo.otherDirection) this.flipImage(mo);
@@ -266,8 +266,8 @@ class World {
   }
 
   /**
-   * Executes the flipImage method.
-   * @param {any} mo - The mo parameter.
+   * Flips the image of an object horizontally.
+   * @param {any} mo - The object to flip.
    */
   flipImage(mo) {
     this.ctx.save();
@@ -277,8 +277,8 @@ class World {
   }
 
   /**
-   * Executes the flipImageBack method.
-   * @param {any} mo - The mo parameter.
+   * Restores the normal orientation after flipping.
+   * @param {any} mo - The object.
    */
   flipImageBack(mo) {
     mo.x = mo.x * -1;

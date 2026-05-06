@@ -21,10 +21,10 @@ class ThrowableObject extends MovableObject {
   hasHit = false;
 
   /**
-   * Initializes the instance.
-   * @param {any} x - The x parameter.
-   * @param {any} y - The y parameter.
-   * @param {any} otherDirection - The otherDirection parameter.
+   * Initializes the throwable object (bottle) and starts its throw.
+   * @param {any} x - The x position.
+   * @param {any} y - The y position.
+   * @param {any} otherDirection - Direction of throw.
    */
   constructor(x, y, otherDirection) {
     super().loadImage(this.IMAGES_ROTATING[0]);
@@ -39,14 +39,14 @@ class ThrowableObject extends MovableObject {
   }
 
   /**
-   * Executes the isAboveGround method.
+   * Always returns true (bottle is always above ground).
    */
   isAboveGround() {
     return true;
   }
 
   /**
-   * Executes the throw method.
+   * Starts the throw animation and movement.
    */
   throw() {
     this.speedY = 30;
@@ -62,8 +62,8 @@ class ThrowableObject extends MovableObject {
   }
 
   /**
-   * Executes the animate method.
-   * @param {any} moveInterval - The moveInterval parameter.
+   * Animates the bottle (rotating or splash) depending on hit state.
+   * @param {any} moveInterval - The movement interval.
    */
   animate(moveInterval) {
     setInterval(() => {

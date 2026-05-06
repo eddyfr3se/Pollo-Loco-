@@ -6,10 +6,10 @@ class BackgroundObject extends MovableObject {
   width = 720;
   height = 480;
   /**
-   * Initializes the instance.
-   * @param {any} imagePath - The imagePath parameter.
-   * @param {any} x - The x parameter.
-   * @param {any} y - The y parameter.
+   * Initializes the background object with image and position.
+   * @param {any} imagePath - The image path.
+   * @param {any} x - The x position.
+   * @param {any} y - The y position.
    */
   constructor(imagePath, x, y) {
     super().loadImage(imagePath);

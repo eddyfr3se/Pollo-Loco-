@@ -5,7 +5,7 @@ let soundEnabled =
   localStorage.getItem("soundEnabled") === "false" ? false : true;
 
 /**
- * Executes the init function.
+ * Initializes the game, binds button events, and sets sound icon.
  */
 function init() {
   bindBttnPressEvents();
@@ -16,7 +16,7 @@ function init() {
 }
 
 /**
- * Executes the bindBttnPressEvents function.
+ * Binds all button press events for mobile controls.
  */
 function bindBttnPressEvents() {
   bindMovementButtons();
@@ -28,7 +28,7 @@ function bindBttnPressEvents() {
 }
 
 /**
- * Executes the bindMovementButtons function.
+ * Binds left/right movement buttons for touch controls.
  */
 function bindMovementButtons() {
   let btnLeft = document.getElementById("btnLeft");
@@ -56,7 +56,7 @@ function bindMovementButtons() {
 }
 
 /**
- * Executes the bindActionButtons function.
+ * Binds jump and throw action buttons for touch controls.
  */
 function bindActionButtons() {
   let btnJump = document.getElementById("btnJump");
@@ -84,7 +84,7 @@ function bindActionButtons() {
 }
 
 /**
- * Executes the startGame function.
+ * Starts the game, resets keyboard, updates UI, and initializes world/audio.
  */
 function startGame() {
   document.body.classList.add("game-started");
@@ -95,7 +95,7 @@ function startGame() {
 }
 
 /**
- * Executes the resetKeyboard function.
+ * Resets all keyboard input states to false.
  */
 function resetKeyboard() {
   keyboard.LEFT = false;
@@ -106,7 +106,7 @@ function resetKeyboard() {
 }
 
 /**
- * Executes the updateUIForGameStart function.
+ * Updates the UI to show the game and hide menus.
  */
 function updateUIForGameStart() {
   document.getElementById("startScreen").style.display = "none";
@@ -116,7 +116,7 @@ function updateUIForGameStart() {
 }
 
 /**
- * Executes the initWorldAndAudio function.
+ * Initializes the level, world, and background music.
  */
 function initWorldAndAudio() {
   initLevel();
@@ -127,7 +127,7 @@ function initWorldAndAudio() {
 }
 
 /**
- * Executes the checkMobileFullscreen function.
+ * Requests fullscreen mode on mobile devices if supported.
  */
 function checkMobileFullscreen() {
   if (window.matchMedia("(max-width: 1366px) and (pointer: coarse)").matches) {
@@ -177,7 +177,7 @@ window.addEventListener("keyup", (e) => {
 });
 
 /**
- * Executes the openInstructions function.
+ * Shows the instructions panel and hides the start screen.
  */
 function openInstructions() {
   document.getElementById("startScreen").style.display = "none";
@@ -185,7 +185,7 @@ function openInstructions() {
 }
 
 /**
- * Executes the closeInstructions function.
+ * Hides the instructions panel and shows the start screen.
  */
 function closeInstructions() {
   document.getElementById("instructionsPanel").style.display = "none";
@@ -193,8 +193,8 @@ function closeInstructions() {
 }
 
 /**
- * Executes the gameOver function.
- * @param {any} isWin - The isWin parameter.
+ * Handles game over state and displays the end screen.
+ * @param {any} isWin - True if player won, false if lost.
  */
 function gameOver(isWin) {
   clearAllIntervals();
@@ -208,14 +208,14 @@ function gameOver(isWin) {
 }
 
 /**
- * Executes the clearAllIntervals function.
+ * Clears all running intervals in the game.
  */
 function clearAllIntervals() {
   for (let i = 1; i < 9999; i++) window.clearInterval(i);
 }
 
 /**
- * Executes the restartGame function.
+ * Restarts the game from the end screen.
  */
 function restartGame() {
   document.getElementById("endScreen").style.display = "none";
@@ -223,14 +223,14 @@ function restartGame() {
 }
 
 /**
- * Executes the goToHome function.
+ * Reloads the page to return to the home/start screen.
  */
 function goToHome() {
   window.location.reload();
 }
 
 /**
- * Executes the toggleSound function.
+ * Toggles sound on/off and updates the sound icon.
  */
 function toggleSound() {
   if (document.activeElement) document.activeElement.blur();
@@ -246,14 +246,14 @@ function toggleSound() {
 }
 
 /**
- * Executes the applySoundSettings function.
+ * Applies the current sound setting to all audio.
  */
 function applySoundSettings() {
   AudioHub.applySoundSettings(soundEnabled);
 }
 
 /**
- * Executes the toggleFullscreen function.
+ * Toggles fullscreen mode for the game container.
  */
 function toggleFullscreen() {
   if (document.activeElement) document.activeElement.blur();
