@@ -134,24 +134,25 @@ class World {
   }
 
   /**
-   * Checks if the character collects a coin and updates the display.
+   * Checks if the character collects a coin and updates the display.(sound)
    */
   checkCoinCollisions() {
     this.level.coins.forEach((coin, index) => {
       if (this.character.isColliding(coin)) {
+        AudioHub.play(AudioHub.COLLECT_SOUND);
         this.character.collectCoin();
         this.statusBarCoin.setPercentage(this.character.coins);
         this.level.coins.splice(index, 1);
       }
     });
   }
-
   /**
-   * Checks if the character collects a bottle and updates the display.
+   * Checks if the character collects a bottle and updates the display.(Sound)
    */
   checkBottleCollisions() {
     this.level.bottles.forEach((bottle, index) => {
       if (this.character.isColliding(bottle)) {
+        AudioHub.play(AudioHub.COLLECT_SOUND);
         this.character.collectBottle();
         this.statusBarBottle.setPercentage(this.character.bottles);
         let collectedBottle = this.level.bottles.splice(index, 1)[0];

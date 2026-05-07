@@ -166,20 +166,6 @@ canvas {
   z-index: 10;
 }
 
-#startScreen img {
-  max-width: 80%;
-  max-height: 70%;
-  object-fit: contain;
-  margin-bottom: 20px;
-}
-
-#startScreen img {
-  max-width: 80%;
-  max-height: 70%;
-  object-fit: contain;
-  margin-bottom: 20px;
-}
-
 #instructionsPanel {
   position: fixed;
   top: 50%;
@@ -433,7 +419,6 @@ body.game-started .impressum-btn {
     font-size: 14px;
   }
 
-  #startScreen img,
   #endScreen img {
     max-height: 45%;
     margin-bottom: 10px;

@@ -15,6 +15,8 @@ class AudioHub {
   static CHICKEN_DEAD = new Audio("audio/sounds/chicken/chickenDead.mp3");
   static CHICKEN_SMALL_DEAD = new Audio("audio/sounds/chicken/chickenDead2.mp3");
   static BOTTLE_BREAK = new Audio("audio/sounds/throwable/bottleBreak.mp3");
+  static COLLECT_SOUND = new Audio("audio/sounds/collectibles/collectSound.wav");
+
 
   /**
    * Array containing all audio instances.
@@ -28,9 +30,9 @@ class AudioHub {
     AudioHub.CHAR_SNORE,
     AudioHub.CHICKEN_DEAD,
     AudioHub.CHICKEN_SMALL_DEAD,
-    AudioHub.BOTTLE_BREAK
+    AudioHub.BOTTLE_BREAK,
+    AudioHub.COLLECT_SOUND
   ];
-
   /**
    * Plays a given audio instance from the beginning.
    * @param {HTMLAudioElement} sound - The audio element to play.
