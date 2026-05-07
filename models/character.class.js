@@ -172,6 +172,10 @@ class Character extends MovableObject {
    * Determines and plays the correct animation based on the character's state.
    */
   playCharacterAnimations() {
+    if (this.isDead() || this.isHurt() || this.isAboveGround() || this.isMoving()) {
+      AudioHub.CHAR_SNORE.pause();
+    }
+
     if (this.isDead()) {
       this.handleDeadAnimation();
     } else if (this.isHurt()) {
@@ -243,10 +247,13 @@ class Character extends MovableObject {
     let timepassed = new Date().getTime() - this.lastAction;
     if (timepassed > 5000) {
       this.playAnimation(this.IMAGES_LONG_IDLE);
+      AudioHub.CHAR_SNORE.play().catch((e) => { });
     } else {
       this.playAnimation(this.IMAGES_IDLE);
+      AudioHub.CHAR_SNORE.pause();
     }
   }
+
 
   /**
    * Triggers the character's jump by setting vertical speed and playing a sound.

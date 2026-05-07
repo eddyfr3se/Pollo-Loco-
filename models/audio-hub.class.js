@@ -11,10 +11,25 @@ class AudioHub {
   static CHAR_RUN = new Audio("audio/sounds/character/characterRun.mp3");
   static CHAR_JUMP = new Audio("audio/sounds/character/characterJump.wav");
 
+  static CHAR_SNORE = new Audio("audio/sounds/character/characterSnoring.mp3");
+  static CHICKEN_DEAD = new Audio("audio/sounds/chicken/chickenDead.mp3");
+  static CHICKEN_SMALL_DEAD = new Audio("audio/sounds/chicken/chickenDead2.mp3");
+  static BOTTLE_BREAK = new Audio("audio/sounds/throwable/bottleBreak.mp3");
+
   /**
    * Array containing all audio instances.
    */
-  static allSounds = [AudioHub.BG_MUSIC, AudioHub.BOSS_HIT, AudioHub.CHAR_HIT, AudioHub.CHAR_RUN, AudioHub.CHAR_JUMP];
+  static allSounds = [
+    AudioHub.BG_MUSIC,
+    AudioHub.BOSS_HIT,
+    AudioHub.CHAR_HIT,
+    AudioHub.CHAR_RUN,
+    AudioHub.CHAR_JUMP,
+    AudioHub.CHAR_SNORE,
+    AudioHub.CHICKEN_DEAD,
+    AudioHub.CHICKEN_SMALL_DEAD,
+    AudioHub.BOTTLE_BREAK
+  ];
 
   /**
    * Plays a given audio instance from the beginning.
@@ -38,3 +53,4 @@ class AudioHub {
 
 AudioHub.BG_MUSIC.loop = true;
 AudioHub.CHAR_RUN.loop = true;
+AudioHub.CHAR_SNORE.loop = true;

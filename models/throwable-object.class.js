@@ -43,6 +43,7 @@ class ThrowableObject extends MovableObject {
    */
   isAboveGround() {
     return true;
+    return this.y < 350;
   }
 
   /**
@@ -67,9 +68,17 @@ class ThrowableObject extends MovableObject {
    */
   animate(moveInterval) {
     setInterval(() => {
+      if (this.y >= 350 && !this.hasHit) {
+        this.hasHit = true;
+      }
+
       if (this.hasHit) {
         this.playAnimation(this.IMAGES_SPLASH);
         clearInterval(moveInterval);
+        if (!this.soundPlayed) {
+          AudioHub.play(AudioHub.BOTTLE_BREAK);
+          this.soundPlayed = true;
+        }
       } else {
         this.playAnimation(this.IMAGES_ROTATING);
       }

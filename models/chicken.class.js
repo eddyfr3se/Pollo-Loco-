@@ -22,6 +22,21 @@ class Chicken extends MovableObject {
   IMAGE_DEAD = "img/3_enemies_chicken/chicken_normal/2_dead/dead.png";
 
   /**
+ * Registers a hit and plays the appropriate death sound.
+ */
+  hit() {
+    let wasDead = this.isDead();
+    super.hit();
+    if (!wasDead && this.isDead()) {
+      if (this instanceof ChickenSmall) {
+        AudioHub.play(AudioHub.CHICKEN_SMALL_DEAD);
+      } else {
+        AudioHub.play(AudioHub.CHICKEN_DEAD);
+      }
+    }
+  }
+
+  /**
    * Initializes the chicken at a given position and starts animation.
    * @param {any} x - The x position.
    */

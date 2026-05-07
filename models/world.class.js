@@ -194,7 +194,7 @@ class World {
           enemy.hit();
           bottle.hasHit = true;
           if (enemy.isDead() && !(enemy instanceof Endboss)) {
-            this.score += 50;
+            this.score += 100;
           }
           if (enemy instanceof Endboss) {
             this.statusBarEndboss.setPercentage(enemy.energy);
