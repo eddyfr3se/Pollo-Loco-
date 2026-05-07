@@ -186,7 +186,7 @@ class World {
   }
 
   /**
-   * Checks if thrown bottles hit enemies and handles hits.
+   * Checks if thrown bottles hit enemies and handles hits.Boss kill points.
    */
   checkBottleEnemyCollisions() {
     this.throwableObjects.forEach((bottle) => {
@@ -199,11 +199,15 @@ class World {
           }
           if (enemy instanceof Endboss) {
             this.statusBarEndboss.setPercentage(enemy.energy);
+            if (enemy.isDead()) {
+              this.score += 300;
+            }
           }
         }
       });
     });
   }
+
 
   /**
    * Draws the entire game world and all objects (game loop).

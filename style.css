@@ -210,9 +210,18 @@ canvas {
 
 #endScreen img {
   max-width: 80%;
-  max-height: 70%;
+  max-height: 50%;
   object-fit: contain;
+  margin-bottom: 10px;
+}
+
+#finalScoreDisplay {
+  font-size: 36px;
+  color: #ff9800;
   margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  font-weight: bold;
+  text-align: center;
 }
 
 #gameOverlay {
@@ -420,7 +429,12 @@ body.game-started .impressum-btn {
   }
 
   #endScreen img {
-    max-height: 45%;
+    max-height: 40%;
+    margin-bottom: 10px;
+  }
+
+  #finalScoreDisplay {
+    font-size: 24px;
     margin-bottom: 10px;
   }
 

@@ -193,18 +193,37 @@ function closeInstructions() {
 }
 
 /**
- * Handles game over state and displays the end screen.
- * @param {any} isWin - True if player won, false if lost.
+ * Ends the game, stops music, updates score, and shows the end screen.
+ * @param {boolean} isWin - Determines whether the player won or lost.
  */
 function gameOver(isWin) {
   clearAllIntervals();
   AudioHub.BG_MUSIC.pause();
   AudioHub.BG_MUSIC.currentTime = 0;
+
+  handleHighScore();
+
   document.getElementById("endScreen").style.display = "flex";
   let imgPath = isWin
     ? "img/You won, you lost/You Win A.png"
     : "img/You won, you lost/Game Over.png";
   document.getElementById("endScreenImage").src = imgPath;
+}
+
+/**
+ * Calculates, saves, and displays the highscore on the end screen.
+ */
+function handleHighScore() {
+  let currentScore = world.score;
+  let storedHighScore = localStorage.getItem("elPolloLocoHighScore") || 0;
+
+  if (currentScore > storedHighScore) {
+    storedHighScore = currentScore;
+    localStorage.setItem("elPolloLocoHighScore", storedHighScore);
+  }
+
+  let scoreText = `Score: ${currentScore} | Highscore: ${storedHighScore}`;
+  document.getElementById("finalScoreDisplay").innerText = scoreText;
 }
 
 /**
