@@ -143,7 +143,7 @@ canvas {
 
 .instructions-desc {
   margin-top: 20px;
-  font-size: 20px;
+  font-size: 22px;
   color: #ccc;
 }
 
@@ -181,22 +181,29 @@ canvas {
 }
 
 #instructionsPanel {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.85);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background-color: rgba(0, 0, 0, 0.9);
   color: white;
   display: none;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  z-index: 20;
+  z-index: 1000;
+  padding: 30px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 #instructionsPanel h2 {
-  font-size: 40px;
+  font-size: 50px;
   margin-bottom: 30px;
   color: #ff9800;
 }
@@ -322,6 +329,11 @@ canvas {
   background-color: rgba(255, 255, 255, 0.5);
 }
 
+#btnThrow img {
+  height: 50px;
+  vertical-align: middle;
+}
+
 #fullscreenBtn {
   display: none;
 }
@@ -370,14 +382,49 @@ body.game-started .impressum-btn {
   body:not(.game-started) .game-container canvas {
     object-fit: cover;
   }
+
+  body:not(.game-started) {
+    background-image: none;
+    background-color: #2a0808;
+  }
+
+  #startScreen {
+    background-size: 100% 100%;
+    background-position: center;
+    justify-content: flex-end;
+    padding-bottom: 80px;
+    padding-top: 0;
+  }
+
+  #startScreen .button-container {
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  #startScreen .button-container .btn {
+    width: 220px;
+    padding: 15px 20px;
+    font-size: 18px;
+  }
+
+  .impressum-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+  }
 }
+
+
 
 @media (max-width: 540px),
 (max-height: 480px) {
   .button-container {
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 3px;
+    margin: -14px;
   }
 
   .button-container .btn {
@@ -390,5 +437,49 @@ body.game-started .impressum-btn {
   #endScreen img {
     max-height: 45%;
     margin-bottom: 10px;
+  }
+
+  #instructionsPanel {
+    padding: 15px 10px;
+    width: 95%;
+  }
+
+  #instructionsPanel h2 {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+
+  .keys p {
+    font-size: 14px;
+    margin: 5px 0;
+  }
+
+  .keys span {
+    padding: 4px 6px;
+    margin-right: 6px;
+    font-size: 13px;
+    min-width: 30px;
+  }
+
+  .instructions-desc {
+    margin-top: 12px;
+    font-size: 12px;
+    line-height: 1.3;
+    text-align: center;
+  }
+
+  .back-btn {
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 630px) {
+  #startScreen {
+    background-image: url("img/9_intro_outro_screens/start/hochformat mobil phone.png");
+    background-size: 100% 100%;
+    justify-content: center;
+    padding-bottom: 0;
   }
 }

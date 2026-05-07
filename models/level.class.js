@@ -11,12 +11,12 @@ class Level {
   level_end_x = 5450;
 
   /**
-   * Initializes the instance.
-   * @param {any} enemies - The enemies parameter.
-   * @param {any} clouds - The clouds parameter.
-   * @param {any} backgroundObjects - The backgroundObjects parameter.
-   * @param {any} coins - The coins parameter.
-   * @param {any} bottles - The bottles parameter.
+   * Creates a new level with all game objects.
+   * @param {Array} enemies - The enemies in the level.
+   * @param {Array} clouds - The clouds in the level.
+   * @param {Array} backgroundObjects - The background objects in the level.
+   * @param {Array} coins - The coins in the level.
+   * @param {Array} bottles - The bottles in the level.
    */
   constructor(enemies, clouds, backgroundObjects, coins, bottles) {
     this.enemies = enemies;

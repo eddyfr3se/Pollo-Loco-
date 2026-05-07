@@ -34,7 +34,6 @@ class Character extends MovableObject {
     "img/2_character_pepe/5_dead/D-54.png",
     "img/2_character_pepe/5_dead/D-55.png",
     "img/2_character_pepe/5_dead/D-56.png",
-    "img/2_character_pepe/5_dead/D-57.png",
   ];
 
   IMAGES_HURT = [
@@ -47,6 +46,8 @@ class Character extends MovableObject {
   coins = 0;
   bottles = 0;
   lastAction = 0;
+  currentJumpImage = 0;
+  currentDeadImage = 0;
   offset = {
     top: 120,
     bottom: 30,
@@ -55,7 +56,7 @@ class Character extends MovableObject {
   };
 
   /**
-   * Handles the character taking damage and plays hit sound.
+   * Registers a hit on the character and plays the hurt sound.
    */
   hit() {
     if (!this.isHurt()) {
@@ -91,7 +92,7 @@ class Character extends MovableObject {
   ];
 
   /**
-   * Initializes the character, loads all images, and starts animation.
+   * Initializes the character, loads all images, and starts gravity and animations.
    */
   constructor() {
     super();
@@ -109,7 +110,7 @@ class Character extends MovableObject {
   }
 
   /**
-   * Increases the coin count when a coin is collected.
+   * Increases the coin counter when a coin is collected (max 100).
    */
   collectCoin() {
     this.coins += 10;
@@ -117,7 +118,7 @@ class Character extends MovableObject {
   }
 
   /**
-   * Increases the bottle count when a bottle is collected.
+   * Increases the bottle counter when a bottle is collected (max 100).
    */
   collectBottle() {
     this.bottles += 10;
@@ -125,16 +126,15 @@ class Character extends MovableObject {
   }
 
   /**
-   * Starts the character's movement and animation intervals.
+   * Starts the game loops for character movement and animation updates.
    */
   animate() {
     setInterval(() => this.moveCharacter(), 1000 / 60);
     setInterval(() => this.playCharacterAnimations(), 100);
   }
 
-
   /**
-   * Moves the character based on keyboard input and updates camera.
+   * Handles continuous character movement and updates the camera position.
    */
   moveCharacter() {
     AudioHub.CHAR_RUN.pause();
@@ -145,9 +145,10 @@ class Character extends MovableObject {
   }
 
   /**
-   * Handles left, right, and jump movement logic.
+   * Checks keyboard inputs to move the character left, right, or jump.
    */
   handleMovement() {
+    if (this.isDead()) return;
     if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
       this.moveRight();
       this.otherDirection = false;
@@ -168,51 +169,91 @@ class Character extends MovableObject {
   }
 
   /**
-   * Plays the correct animation based on character state (dead, hurt, jumping, idle, etc.).
+   * Determines and plays the correct animation based on the character's state.
    */
   playCharacterAnimations() {
     if (this.isDead()) {
-      this.playAnimation(this.IMAGES_DEAD);
+      this.handleDeadAnimation();
     } else if (this.isHurt()) {
       this.playAnimation(this.IMAGES_HURT);
       this.lastAction = new Date().getTime();
     } else if (this.isAboveGround()) {
-      this.playAnimation(this.IMAGES_JUMPING);
-      this.lastAction = new Date().getTime();
+      this.handleJumpAnimation();
     } else {
+      this.currentJumpImage = 0;
       this.playGroundAnimations();
     }
   }
 
   /**
-   * Plays walking or idle/long idle animations depending on movement and inactivity.
-   */
-  playGroundAnimations() {
-    if (
-      this.world &&
-      this.world.keyboard &&
-      (this.world.keyboard.RIGHT || this.world.keyboard.LEFT)
-    ) {
-      this.playAnimation(this.IMAGES_WALKING);
-      this.lastAction = new Date().getTime();
+ * Plays the dead animation exactly once and holds the final frame.
+ */
+  handleDeadAnimation() {
+    if (this.currentDeadImage < this.IMAGES_DEAD.length) {
+      let path = this.IMAGES_DEAD[this.currentDeadImage];
+      this.img = this.imageCache[path];
+      this.currentDeadImage++;
     } else {
-      if (this.world && this.world.keyboard && this.world.keyboard.SPACE) {
-        this.lastAction = new Date().getTime();
-      }
-      let timepassed = new Date().getTime() - this.lastAction;
-      if (timepassed > 5000) {
-        this.playAnimation(this.IMAGES_LONG_IDLE);
-      } else {
-        this.playAnimation(this.IMAGES_IDLE);
-      }
+      let path = this.IMAGES_DEAD[this.IMAGES_DEAD.length - 1];
+      this.img = this.imageCache[path];
     }
   }
 
   /**
-   * Makes the character jump and plays jump sound.
+   * Plays the jump animation exactly once and holds the final frame until landing.
+   */
+  handleJumpAnimation() {
+    if (this.currentJumpImage < this.IMAGES_JUMPING.length) {
+      let path = this.IMAGES_JUMPING[this.currentJumpImage];
+      this.img = this.imageCache[path];
+      this.currentJumpImage++;
+    } else {
+      let path = this.IMAGES_JUMPING[this.IMAGES_JUMPING.length - 1];
+      this.img = this.imageCache[path];
+    }
+    this.lastAction = new Date().getTime();
+  }
+
+  /**
+   * Plays walking animations if moving, otherwise switches to idle animations.
+   */
+  playGroundAnimations() {
+    if (this.isMoving()) {
+      this.playAnimation(this.IMAGES_WALKING);
+      this.lastAction = new Date().getTime();
+    } else {
+      this.handleIdleAnimation();
+    }
+  }
+
+  /**
+   * Returns true if the left or right arrow keys are currently pressed.
+   */
+  isMoving() {
+    return this.world && this.world.keyboard && (this.world.keyboard.RIGHT || this.world.keyboard.LEFT);
+  }
+
+  /**
+   * Switches between the regular idle and long idle animation based on inactivity time.
+   */
+  handleIdleAnimation() {
+    if (this.world && this.world.keyboard && this.world.keyboard.SPACE) {
+      this.lastAction = new Date().getTime();
+    }
+    let timepassed = new Date().getTime() - this.lastAction;
+    if (timepassed > 5000) {
+      this.playAnimation(this.IMAGES_LONG_IDLE);
+    } else {
+      this.playAnimation(this.IMAGES_IDLE);
+    }
+  }
+
+  /**
+   * Triggers the character's jump by setting vertical speed and playing a sound.
    */
   jump() {
     this.speedY = 30;
+    this.currentJumpImage = 0;
     AudioHub.play(AudioHub.CHAR_JUMP);
   }
 }

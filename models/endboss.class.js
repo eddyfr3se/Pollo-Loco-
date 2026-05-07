@@ -6,7 +6,7 @@ class Endboss extends MovableObject {
     height = 500;
     width = 300;
     y = -35;
-    speed = 5.0;
+    speed = 10.0;
     hadFirstContact = false;
     firstContactTime = 0;
     attackTimer = 0;

@@ -16,6 +16,7 @@ class World {
   throwableObjects = [];
   lastThrowTime = 0;
   isGameOver = false;
+  score = 0;
 
   /**
    * Creates a new game world, connects canvas and keyboard, starts drawing and game logic.
@@ -110,7 +111,7 @@ class World {
   }
 
   /**
-   * Checks if the character collides with an enemy and handles hit or jump on enemy.
+   * Checks if the character collides with an enemy and handles hit or jump on enemy. Points for kill
    */
   checkEnemyCollisions() {
     let isJumpingOnEnemy = this.character.speedY < 0;
@@ -122,6 +123,7 @@ class World {
           isJumpingOnEnemy
         ) {
           enemy.hit();
+          if (enemy.isDead()) this.score += 50;
           this.character.jump();
         } else {
           this.character.hit();
@@ -152,10 +154,14 @@ class World {
       if (this.character.isColliding(bottle)) {
         this.character.collectBottle();
         this.statusBarBottle.setPercentage(this.character.bottles);
-        this.level.bottles.splice(index, 1);
+        let collectedBottle = this.level.bottles.splice(index, 1)[0];
+        setTimeout(() => {
+          this.level.bottles.push(collectedBottle);
+        }, 6000);
       }
     });
   }
+
 
   /**
    * Checks if the player throws a bottle and creates a new throwable object if so.
@@ -164,8 +170,8 @@ class World {
     let timepassed = new Date().getTime() - this.lastThrowTime;
     if (this.keyboard.SPACE && this.character.bottles > 0 && timepassed > 500) {
       let xPos = this.character.otherDirection
-        ? this.character.x - 20
-        : this.character.x + 100;
+        ? this.character.x + 30
+        : this.character.x + 40;
       let bottle = new ThrowableObject(
         xPos,
         this.character.y + 100,
@@ -187,6 +193,9 @@ class World {
         if (bottle.isColliding(enemy) && !bottle.hasHit && !enemy.isDead()) {
           enemy.hit();
           bottle.hasHit = true;
+          if (enemy.isDead() && !(enemy instanceof Endboss)) {
+            this.score += 50;
+          }
           if (enemy instanceof Endboss) {
             this.statusBarEndboss.setPercentage(enemy.energy);
           }
@@ -222,6 +231,18 @@ class World {
     this.addToMap(this.statusBarCoin);
     this.addToMap(this.statusBarBottle);
     this.drawEndbossStatusBar();
+    this.drawScore();
+  }
+
+  /**
+   * Draws the current score in the top right of the canvas.
+   */
+  drawScore() {
+    this.ctx.font = "36px UnifrakturCook, sans-serif";
+    this.ctx.fillStyle = "white";
+    this.ctx.textAlign = "right";
+    this.ctx.fillText("Score: " + this.score, this.canvas.width - 20, 40);
+    this.ctx.textAlign = "left";
   }
 
   /**
