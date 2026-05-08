@@ -14,9 +14,9 @@ class Coin extends MovableObject {
   };
 
   /**
-   * Initializes the instance.
-   * @param {any} x - The x parameter.
-   * @param {any} y - The y parameter.
+   * Creates a new coin at the given position and starts its animation.
+   * @param {number} x - The X position of the coin.
+   * @param {number} y - The Y position of the coin.
    */
   constructor(x, y) {
     super().loadImage(this.IMAGES[0]);
@@ -27,7 +27,7 @@ class Coin extends MovableObject {
   }
 
   /**
-   * Executes the animate method.
+   * Starts the coin animation by cycling through images.
    */
   animate() {
     setInterval(() => {

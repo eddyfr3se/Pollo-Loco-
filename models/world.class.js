@@ -240,13 +240,20 @@ class World {
   }
 
   /**
-   * Draws the current score in the top right of the canvas.
+   * Draws the current score in the top right of the canvas. Move down the points under the boss health bar
    */
   drawScore() {
     this.ctx.font = "36px UnifrakturCook, sans-serif";
     this.ctx.fillStyle = "white";
     this.ctx.textAlign = "right";
-    this.ctx.fillText("Score: " + this.score, this.canvas.width - 20, 40);
+
+    let endboss = this.level.enemies.find((e) => e instanceof Endboss);
+    let scoreY = 40;
+    if (endboss && endboss.hadFirstContact) {
+      scoreY = 85;
+    }
+
+    this.ctx.fillText("Score: " + this.score, this.canvas.width - 20, scoreY);
     this.ctx.textAlign = "left";
   }
 
