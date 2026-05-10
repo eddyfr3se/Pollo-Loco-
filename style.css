@@ -105,15 +105,13 @@ canvas {
 }
 
 .impressum-btn {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
   color: white;
   text-decoration: none;
-  font-size: 20px;
+  font-size: 18px;
   background: rgba(0, 0, 0, 0.5);
   padding: 5px 10px;
   border-radius: 5px;
+  margin-top: 15px;
   z-index: 100;
   transition: background-color 0.2s;
 }
