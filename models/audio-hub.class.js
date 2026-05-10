@@ -51,8 +51,14 @@ class AudioHub {
       sound.muted = !enabled;
     });
   }
-}
 
-AudioHub.BG_MUSIC.loop = true;
-AudioHub.CHAR_RUN.loop = true;
-AudioHub.CHAR_SNORE.loop = true;
+
+  /**
+   * Initializes audio settings that need to be set once.
+   */
+  static initAudio() {
+    AudioHub.BG_MUSIC.loop = true;
+    AudioHub.CHAR_RUN.loop = true;
+    AudioHub.CHAR_SNORE.loop = true;
+  }
+}

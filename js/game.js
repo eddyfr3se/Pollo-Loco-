@@ -1,14 +1,17 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
-let soundEnabled =
-  localStorage.getItem("soundEnabled") === "false" ? false : true;
+let soundEnabled;
+
 
 /**
  * Initializes the game, binds button events, and sets sound icon.
  */
 function init() {
+  soundEnabled = localStorage.getItem("soundEnabled") === "false" ? false : true;
+  AudioHub.initAudio();
   bindBttnPressEvents();
+  bindKeyPressEvents();
   let icon = document.getElementById("soundBtn");
   if (icon) {
     icon.innerText = soundEnabled ? "🔊" : "🔇";
@@ -140,41 +143,47 @@ function checkMobileFullscreen() {
   }
 }
 
-window.addEventListener("keydown", (e) => {
-  if (e.keyCode == 39) {
-    keyboard.RIGHT = true;
-  }
 
-  if (e.keyCode == 37) {
-    keyboard.LEFT = true;
-  }
+/**
+ * Binds keyboard events to update movement and action keys.
+ */
+function bindKeyPressEvents() {
+  window.addEventListener("keydown", (e) => {
+    if (e.keyCode == 39) {
+      keyboard.RIGHT = true;
+    }
 
-  if (e.keyCode == 38) {
-    keyboard.UP = true;
-  }
+    if (e.keyCode == 37) {
+      keyboard.LEFT = true;
+    }
 
-  if (e.keyCode == 32) {
-    keyboard.SPACE = true;
-  }
-});
+    if (e.keyCode == 38) {
+      keyboard.UP = true;
+    }
 
-window.addEventListener("keyup", (e) => {
-  if (e.keyCode == 39) {
-    keyboard.RIGHT = false;
-  }
+    if (e.keyCode == 32) {
+      keyboard.SPACE = true;
+    }
+  });
 
-  if (e.keyCode == 37) {
-    keyboard.LEFT = false;
-  }
+  window.addEventListener("keyup", (e) => {
+    if (e.keyCode == 39) {
+      keyboard.RIGHT = false;
+    }
 
-  if (e.keyCode == 38) {
-    keyboard.UP = false;
-  }
+    if (e.keyCode == 37) {
+      keyboard.LEFT = false;
+    }
 
-  if (e.keyCode == 32) {
-    keyboard.SPACE = false;
-  }
-});
+    if (e.keyCode == 38) {
+      keyboard.UP = false;
+    }
+
+    if (e.keyCode == 32) {
+      keyboard.SPACE = false;
+    }
+  });
+}
 
 /**
  * Shows the instructions panel and hides the start screen.
