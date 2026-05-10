@@ -152,19 +152,24 @@ class Character extends MovableObject {
     if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
       this.moveRight();
       this.otherDirection = false;
-      if (!this.isAboveGround()) {
-        AudioHub.CHAR_RUN.play();
-      }
+      this.playRunSound();
     }
     if (this.world.keyboard.LEFT && this.x > 0) {
       this.moveLeft();
       this.otherDirection = true;
-      if (!this.isAboveGround()) {
-        AudioHub.CHAR_RUN.play();
-      }
+      this.playRunSound();
     }
     if (this.world.keyboard.UP && !this.isAboveGround()) {
       this.jump();
+    }
+  }
+
+  /**
+   * Plays the running sound if the character is currently on the ground.
+   */
+  playRunSound() {
+    if (!this.isAboveGround()) {
+      AudioHub.CHAR_RUN.play();
     }
   }
 
