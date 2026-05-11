@@ -169,7 +169,7 @@ class World {
    */
   checkThrowObjects() {
     let timepassed = new Date().getTime() - this.lastThrowTime;
-    if (this.keyboard.SPACE && this.character.bottles > 0 && timepassed > 500) {
+    if (this.keyboard.SPACE && this.character.bottles > 0 && timepassed > 1500) {
       let xPos = this.character.otherDirection
         ? this.character.x + 30
         : this.character.x + 40;

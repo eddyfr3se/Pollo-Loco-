@@ -225,15 +225,18 @@ function gameOver(isWin) {
 function handleHighScore() {
   let currentScore = world.score;
   let storedHighScore = localStorage.getItem("elPolloLocoHighScore") || 0;
+  let scoreDisplay = document.getElementById("finalScoreDisplay");
 
   if (currentScore > storedHighScore) {
-    storedHighScore = currentScore;
-    localStorage.setItem("elPolloLocoHighScore", storedHighScore);
+    localStorage.setItem("elPolloLocoHighScore", currentScore);
+    scoreDisplay.innerText = `🎉 NEW HIGHSCORE: ${currentScore} 🎉`;
+    scoreDisplay.classList.add("new-highscore-anim");
+  } else {
+    scoreDisplay.innerText = `Score: ${currentScore} | Highscore: ${storedHighScore}`;
+    scoreDisplay.classList.remove("new-highscore-anim");
   }
-
-  let scoreText = `Score: ${currentScore} | Highscore: ${storedHighScore}`;
-  document.getElementById("finalScoreDisplay").innerText = scoreText;
 }
+
 
 /**
  * Clears all running intervals in the game.
